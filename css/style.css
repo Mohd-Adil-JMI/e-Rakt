@@ -8,7 +8,7 @@
     padding: 0;
     scroll-behavior: smooth;
 }
-a{
+.navbar a{
     text-decoration: none;
     color: #333;
 }
@@ -106,13 +106,9 @@ ul{
 .heading{
     width: 90%;
     margin : 2rem 0; 
-    font-family: 'Montserrat', sans-serif;
+    /* font-family: 'Montserrat', sans-serif; */
     color : #444;
 }
-.heading h3{
-    font-weight: 800;
-}
-
 
 /* Crousel Section*/
 #Intro{
@@ -133,7 +129,7 @@ ul{
 
 .BloodChart{
     /* text-align: right; */
-    font-family: 'Source Sans Pro', sans-serif;
+    /* font-family: 'Source Sans Pro', sans-serif; */
     color: #555555;
 }
 
@@ -145,9 +141,8 @@ ul{
 /* Learn More */
 
 .DonatePrepHeading{
-    font-family: 'Source Sans Pro', sans-serif;
+    /* font-family: 'Source Sans Pro', sans-serif; */
     color: #555555;
-    font-weight: 700;
 }
 
 .DonatePrep{
@@ -168,7 +163,9 @@ ul{
     font-size: 1.2em;
 }
 
-
+ol li , p{
+    font-size: 1.2em;
+}
 
 /* footer (Contact us) */
 footer{
@@ -197,7 +194,7 @@ footer hr{
 
 .footerSec{
     color: #efefef;
-    font-family: 'Source Sans Pro', sans-serif;
+    /* font-family: 'Source Sans Pro', sans-serif; */
 }
 
 .footerSec img{
