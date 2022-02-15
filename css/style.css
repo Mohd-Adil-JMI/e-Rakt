@@ -32,10 +32,10 @@
 .logo img{
     height: 74px;
 }
-.search{
+.user{
     position: relative;
 }
-.search input{
+.user input{
     width: 324px;
     height: 48px;
     padding-left: 12px;
@@ -44,7 +44,7 @@
     border: none;
     outline: none;
 }
-.search button{
+.user button{
     width: 96px;
     height: 48px;
     border-radius: 2px;
@@ -53,11 +53,11 @@
     outline: none;
     background: rgb(212, 212, 212,0.5);
 }
-.search button:hover{
+.user button:hover{
     background: #C91F42;
     color: #efefef;
 }
-.search .social{
+.user .social{
     position: absolute;
     right:0px;
     margin-top: 4px;
@@ -79,12 +79,13 @@ ul{
 }
 .nav-item{
     display: flex;
-    width: 200px;
+    width: 204px;
     height: 48px;
     border-radius: 2px;
     align-items: center;
     justify-content: center;
     background: rgb(212, 212, 212,0.5);
+    cursor: pointer;
 }
 .nav-item:hover{
     background: #C91F42;
