@@ -1,0 +1,149 @@
+<%- include("header") -%>
+
+
+    <section class="stock-container">
+        <div class="stock-header">
+            <h3 class="text-danger">Blood Stock Availability</h3>
+            <div class="panel panel-danger">
+                <div class="panel-heading">Search Blood Stock</div>
+                <div class="panel-body">
+
+                    <form action="/search" method="post">
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <select name="state" class="form-select form-select-lg mb-3"
+                                    aria-label=".form-select-lg example" id="stateName"
+                                    onchange="loadDistrict('stateName','DistrictName')">
+                                    <option value="SelectState">Select State</option>
+                                    <option value="Andra Pradesh">Andra Pradesh</option>
+                                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                    <option value="Assam">Assam</option>
+                                    <option value="Bihar">Bihar</option>
+                                    <option value="Chhattisgarh">Chhattisgarh</option>
+                                    <option value="Goa">Goa</option>
+                                    <option value="Gujarat">Gujarat</option>
+                                    <option value="Haryana">Haryana</option>
+                                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                    <option value="Jharkhand">Jharkhand</option>
+                                    <option value="Karnataka">Karnataka</option>
+                                    <option value="Kerala">Kerala</option>
+                                    <option value="Madya Pradesh">Madya Pradesh</option>
+                                    <option value="Maharashtra">Maharashtra</option>
+                                    <option value="Manipur">Manipur</option>
+                                    <option value="Meghalaya">Meghalaya</option>
+                                    <option value="Mizoram">Mizoram</option>
+                                    <option value="Nagaland">Nagaland</option>
+                                    <option value="Orissa">Orissa</option>
+                                    <option value="Punjab">Punjab</option>
+                                    <option value="Rajasthan">Rajasthan</option>
+                                    <option value="Sikkim">Sikkim</option>
+                                    <option value="Tamil Nadu">Tamil Nadu</option>
+                                    <option value="Telangana">Telangana</option>
+                                    <option value="Tripura">Tripura</option>
+                                    <option value="Uttarakhand">Uttarakhand</option>
+                                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                    <option value="West Bengal">West Bengal</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3 lineseparator">
+                                <select name="city" class="form-select form-select-lg mb-3"
+                                    aria-label=".form-select-lg example" id="DistrictName">
+                                    <option selected vlaue="Select District">Select District</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3">
+                                <select name="Bloodgrp" class="form-select form-select-lg mb-3"
+                                    aria-label=".form-select-lg example">
+                                    <option selected>All Blood Groups</option>
+                                    <option value="1">A+</option>
+                                    <option value="2">A-</option>
+                                    <option value="3">B+</option>
+                                    <option value="4">B-</option>
+                                    <option value="5">AB+</option>
+                                    <option value="6">AB-</option>
+                                    <option value="7">O+</option>
+                                    <option value="8">O-</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-3">
+                                <select name="wholeblood" class="form-select form-select-lg mb-3"
+                                    aria-label=".form-select-lg example">
+                                    <option selected>Whole Blood</option>
+                                    <option value="1">Plasma</option>
+                                    <option value="2">Single Donor Platelet</option>
+                                    <option value="3">Single Donor Plasma</option>
+                                    <option value="4">Packed Red Blood Cells</option>
+                                </select>
+                            </div>
+
+                            <br>
+                            <br>
+
+                            <div align="center">
+                                <button name="searchFormButton" type="submit" id="searchButton"
+                                    class="btn btn-danger">Search</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- table using loop -->
+        <% if(results.length> 0){ %>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Bank ID</th>
+                        <th scope="col">Bank Name</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">City</th>
+                        <th scope="col">State</th>
+                        <th scope="col">Contact No</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <% for(var i=0; i<results.length; i++){ %>
+                        <tr>
+                            <th scope="row">
+                                <%= i+1 %></i>
+                            </th>
+                            <td>
+                                <%= results[i].properties.blood_bank_name %>
+                            </td>
+                            <td>
+                                <%= results[i].properties.address %>
+                            </td>
+                            <td>
+                                <%= results[i].properties.city %>
+                            </td>
+                            <td>
+                                <%= results[i].properties.state %>
+                            </td>
+                            <td>
+                                <%= results[i].properties.contact_no %>
+                            </td>
+                        </tr>
+                        <% } %>
+
+                </tbody>
+            </table>
+        <% } %>
+
+
+
+    </section>
+</div>
+
+
+
+<%- include("footer") -%>
+    
