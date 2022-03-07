@@ -2,7 +2,7 @@
 
 
     <section class="stock-container">
-        <div class="stock-header">
+        <div class="stock-header" style="margin: 2rem 0;">
             <h3 class="text-danger">Blood Stock Availability</h3>
             <div class="panel panel-danger">
                 <div class="panel-heading">Search Blood Stock</div>
@@ -131,18 +131,28 @@
                             <td>
                                 <%= results[i].properties.contact_no %>
                             </td>
+                            <td>
+                                <form action="/Donate_Buy" method="post">
+                                    <button type="submit" class="btn btn-danger" name="SearchedName" value="<%=i%>">Select</button>
+                                </form>
+                            </td>
                         </tr>
                         <% } %>
 
                 </tbody>
             </table>
         <% } %>
+        <% if(results.length===0){ %>
+            <div class="alert alert-danger" role="alert">
+                No Results Found!
+            </div>
+        <% } %>
+
 
 
 
     </section>
 </div>
-
 
 
 <%- include("footer") -%>
