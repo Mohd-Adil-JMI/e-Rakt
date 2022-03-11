@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const mysql = require('mysql2');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
@@ -12,7 +13,9 @@ dotenv.config({ path: './.env'});
 const app = express();
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+const publicDirectory = path.join(__dirname, './public');
+app.use(express.static(publicDirectory));
+// app.use(express.static("public"));
 // Parse JSON bodies (as sent by API clients)
 app.use(express.json());
 app.use(cookieParser());

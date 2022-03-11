@@ -2,52 +2,73 @@ const express = require('express');
 const request = require('request');
 const authController = require('../controllers/auth');
 const authController2 = require('../controllers/auth2');
+const fs = require('fs');
 
 const router = express.Router();
 
 // To also test if user is logged in or not
-router.get('/', (req, res) => {
-  var user_Exist = "No";
-  if (typeof req.user != "undefined") {
-    user_Exist = "Yes";
-  }
-  res.render('index', { userExist: user_Exist });
-});
-
-// always check if a person is logged in or not using this code in every post/get request :-
-// router.get('/', authController.isLoggedIn, (req, res) => {
+// router.get('/', (req, res) => {
 //   var user_Exist = "No";
 //   if (typeof req.user != "undefined") {
-//      user_Exist = "Yes";
+//     user_Exist = "Yes";
 //   }
-// res.render('index', { userExist: user_Exist });
+//   res.render('index', { userExist: user_Exist });
 // });
 
-router.get('/search', (req, res) => {
+// always check if a person is logged in or not using this code in every post/get request :-
+router.get('/', authController.isLoggedIn, (req, res) => {
+  var user_Exist = "No";
+  if (typeof req.user != "undefined") {
+     user_Exist = "Yes";
+  }
+  console.log(user_Exist);
+res.render('index', { userExist: user_Exist });
+});
+
+router.get('/search',  authController.isLoggedIn, (req, res) => {
   var data = [];
-  res.render('search', { results: data, userExist: "Yes" });
+  var user_Exist = "No";
+  if (typeof req.user != "undefined") {
+     user_Exist = "Yes";
+  }
+  res.render('search', { results: data, userExist: user_Exist });
 });
 
 var Apidata = [];
 
 router.post('/search', (req, res) => {
-  const url = "https://livingatlas.esri.in/server1/rest/services/Health/IN_BloodBankDirectory_2017/MapServer/0/query?outFields=*&where=1%3D1&f=geojson"
-  request({ url: url, json: true }, function (error, response) {
-    Apidata = response.body.features.filter((feature) => { return (feature.properties.city == req.body.city && feature.properties.state == req.body.state) });
-    res.render('search', { results: Apidata, userExist: "Yes" });
-  });
+  // const url = "https://livingatlas.esri.in/server1/rest/services/Health/IN_BloodBankDirectory_2017/MapServer/0/query?outFields=*&where=1%3D1&f=geojson"
+  // request({ url: url, json: true }, function (error, response) {
+  //   Apidata = response.body.features.filter((feature) => { return (feature.properties.city == req.body.city && feature.properties.state == req.body.state) });
+
+  const dataBuffer = fs.readFileSync('APIDATA.json');
+  const JSONdata = dataBuffer.toString();
+  // console.log(JSON.parse(JSONdata).features);
+
+  const features = JSON.parse(JSONdata).features;
+  // console.log(features);
+  Apidata = features.filter((feature) => { return (feature.attributes.city == req.body.city && feature.attributes.state == req.body.state) });
+  // console.log(Apidata);
+  res.render('search', { results: Apidata, userExist: "Yes" });
+  // });
 });
 
-router.get('/register', (req, res) => {
-  res.render('register');
+router.get('/SignUp', (req, res) => {
+  res.render('SignUp', {message:""});
 });
 
-router.get('/login', (req, res) => {
-  res.render('login');
+router.get('/Login', (req, res) => {
+  res.render('Login', {message:""});
+});
+
+router.get('/U_profile', (req, res) => {
+  res.render('U_profile',{userExist: "Yes"});
 });
 
 router.post('/Donate_Buy', (req, res) => {
   var results = req.body.SearchedName;
+  // console.log(Apidata[results]);
+  // console.log(results);
   // console.log(Apidata[results]);
   res.render('Donate_Buy', {arr:Apidata[results], userExist: "Yes"});
 });

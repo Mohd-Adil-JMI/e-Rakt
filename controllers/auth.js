@@ -10,30 +10,22 @@ const db = mysql.createConnection({
   database: process.env.DATABASE
 });
 
-exports.login = async (req, res) => {
+exports.Login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    if( !email || !password ) {
-      return res.status(400).render('login', {
-        message: 'Please provide an email and password'
-      })
-    }
-
     db.query('SELECT * FROM users WHERE email = ?', [email], async (error, results) => {
-      console.log(results);
-      if( !results || !(await bcrypt.compare(password, results[0].password)) ) {
-        res.status(401).render('login', {
-          message: 'Email or Password is incorrect'
-        })
+      // console.log(results);
+      if( !results || !(await bcrypt.compare(password, results[0].Password)) ) {
+        res.status(401).render('login', {message: 'Email or Password is incorrect'});
       } else {
-        const id = results[0].id;
+        const id = results[0].user_id;
 
         const token = jwt.sign({ id }, process.env.JWT_SECRET, {
           expiresIn: process.env.JWT_EXPIRES_IN
         });
 
-        console.log("The token is: " + token);
+        // console.log("The token is: " + token);
 
         const cookieOptions = {
           expires: new Date(
@@ -53,10 +45,10 @@ exports.login = async (req, res) => {
   }
 }
 
-exports.register = (req, res) => {
-  console.log(req.body);
+exports.SignUp = (req, res) => {
+  // console.log(req.body);
 
-  const { name, email, password, passwordConfirm } = req.body;
+  const { fname, lname, email, phoneNo, password, Cpassword, dob, aadharNo, add, bloodgrp, gender} = req.body;
 
   db.query('SELECT email FROM users WHERE email = ?', [email], async (error, results) => {
     if(error) {
@@ -64,32 +56,36 @@ exports.register = (req, res) => {
     }
 
     if( results.length > 0 ) {
-      return res.render('register', {
-        message: 'That email is already in use'
-      })
-    } else if( password !== passwordConfirm ) {
-      return res.render('register', {
-        message: 'Passwords do not match'
-      });
+      return res.render('SignUp', {message: 'That email is already in use'});
+    } else if( password !== Cpassword ) {
+      return res.render('SignUp', {message: 'Passwords do not match'});
     }
 
-    let hashedPassword = await bcrypt.hash(password, 8);
-    console.log(hashedPassword);
+    let hashedPassword = await bcrypt.hash(password, 5);
+    // console.log(hashedPassword);
 
-    db.query('INSERT INTO users SET ?', {name: name, email: email, password: hashedPassword }, (error, results) => {
+    var insertObject = {
+      First_Name:fname,
+      Last_Name:lname,
+      email:email,
+      PhoneNo:phoneNo,
+      Password:hashedPassword,
+      DOB:dob,
+      AadharNo:aadharNo,
+      Address:add,
+      BloodGrp:bloodgrp,
+      Gender:gender
+    }
+
+    db.query('INSERT INTO users SET ?', insertObject, (error, results) => {
       if(error) {
         console.log(error);
       } else {
-        console.log(results);
-        return res.render('register', {
-          message: 'User registered'
-        });
+        // console.log(results);
+        return res.status(200).redirect('/');
       }
-    })
-
-
+    });
   });
-
 }
 
 exports.isLoggedIn = async (req, res, next) => {
@@ -104,16 +100,16 @@ exports.isLoggedIn = async (req, res, next) => {
       console.log(decoded);
 
       //2) Check if the user still exists
-      db.query('SELECT * FROM users WHERE id = ?', [decoded.id], (error, result) => {
-        console.log(result);
+      db.query('SELECT * FROM users WHERE user_id = ?', [decoded.id], (error, result) => {
+        // console.log(result);
 
         if(!result) {
           return next();
         }
 
         req.user = result[0];
-        console.log("user is")
-        console.log(req.user);
+        // console.log("user is");
+        // console.log(req.user);
         return next();
 
       });
@@ -126,7 +122,7 @@ exports.isLoggedIn = async (req, res, next) => {
   }
 }
 
-exports.logout = async (req, res) => {
+exports.Logout = async (req, res) => {
   res.cookie('jwt', 'logout', {
     expires: new Date(Date.now() + 2*1000),
     httpOnly: true
