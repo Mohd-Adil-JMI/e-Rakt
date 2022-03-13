@@ -3,18 +3,13 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { promisify } = require('util');
 
-const db = mysql.createConnection({
-  host: process.env.DATABASE_HOST,
-  user: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASSWORD,
-  database: process.env.DATABASE
-});
+const pool = require('../db/database');
 
 exports.Login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    db.query('SELECT * FROM users WHERE email = ?', [email], async (error, results) => {
+    pool.query('SELECT * FROM users WHERE email = ?', [email], async (error, results) => {
       // console.log(results);
       if( !results || !(await bcrypt.compare(password, results[0].Password)) ) {
         res.status(401).render('login', {message: 'Email or Password is incorrect'});
@@ -50,7 +45,7 @@ exports.SignUp = (req, res) => {
 
   const { fname, lname, email, phoneNo, password, Cpassword, dob, aadharNo, add, bloodgrp, gender} = req.body;
 
-  db.query('SELECT email FROM users WHERE email = ?', [email], async (error, results) => {
+  pool.query('SELECT email FROM users WHERE email = ?', [email], async (error, results) => {
     if(error) {
       console.log(error);
     }
@@ -77,7 +72,7 @@ exports.SignUp = (req, res) => {
       Gender:gender
     }
 
-    db.query('INSERT INTO users SET ?', insertObject, (error, results) => {
+    pool.query('INSERT INTO users SET ?', insertObject, (error, results) => {
       if(error) {
         console.log(error);
       } else {
@@ -100,7 +95,7 @@ exports.isLoggedIn = async (req, res, next) => {
       console.log(decoded);
 
       //2) Check if the user still exists
-      db.query('SELECT * FROM users WHERE user_id = ?', [decoded.id], (error, result) => {
+     pool.query('SELECT * FROM users WHERE user_id = ?', [decoded.id], (error, result) => {
         // console.log(result);
 
         if(!result) {

@@ -37,14 +37,9 @@ router.get('/search',  authController.isLoggedIn, (req, res) => {
 var Apidata = [];
 
 router.post('/search', (req, res) => {
-  // const url = "https://livingatlas.esri.in/server1/rest/services/Health/IN_BloodBankDirectory_2017/MapServer/0/query?outFields=*&where=1%3D1&f=geojson"
-  // request({ url: url, json: true }, function (error, response) {
-  //   Apidata = response.body.features.filter((feature) => { return (feature.properties.city == req.body.city && feature.properties.state == req.body.state) });
-
   const dataBuffer = fs.readFileSync('APIDATA.json');
   const JSONdata = dataBuffer.toString();
   // console.log(JSON.parse(JSONdata).features);
-
   const features = JSON.parse(JSONdata).features;
   // console.log(features);
   Apidata = features.filter((feature) => { return (feature.attributes.city == req.body.city && feature.attributes.state == req.body.state) });
@@ -61,8 +56,12 @@ router.get('/Login', (req, res) => {
   res.render('Login', {message:""});
 });
 
-router.get('/U_profile', (req, res) => {
-  res.render('U_profile',{userExist: "Yes"});
+router.get('/U_profile', authController.isLoggedIn, (req, res) => {
+  if (typeof req.user != "undefined") {
+    res.render('U_profile', {userExist: "Yes"});
+  } else{
+    res.render('Login', {message:""});
+  }
 });
 
 router.post('/Donate_Buy', (req, res) => {

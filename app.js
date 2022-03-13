@@ -8,6 +8,8 @@ const bcrypt = require('bcryptjs');
 const cookieParser = require('cookie-parser');
 const { promisify } = require('util');
 
+// const pool = require('./db/database');
+
 dotenv.config({ path: './.env'});
 
 const app = express();
@@ -21,18 +23,27 @@ app.use(express.json());
 app.use(cookieParser());
 
 
-const db = mysql.createConnection({
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE
-});
+// const db = mysql.createConnection({
+//     host: process.env.DATABASE_HOST,
+//     user: process.env.DATABASE_USER,
+//     password: process.env.DATABASE_PASSWORD,
+//     database: process.env.DATABASE
+// });
 
-db.connect(function (err) {
-    if (err) console.log(err);
-    console.log("MySql connected...");
-});
+// pool.connect(function (err) {
+//     if (err) console.log(err);
+//     console.log("MySql connected...");
+// });
 
+// pool.getConnection(function(err,connection){
+//     if (err) {
+//       connection.release();
+//       throw err;
+//     } 
+//     else{
+//         console.log("MySql connected...");
+//     }
+// });
 
 //Define Routes
 app.use('/', require('./routes/pages'));

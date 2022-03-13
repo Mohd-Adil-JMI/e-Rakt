@@ -18,7 +18,7 @@ editDetails.addEventListener('click', () => {
 })
 
 home.addEventListener('click',()=>{
-    location.href = './user.html'
+    location.href = '/'
 })
 profileTab.addEventListener('click',()=>{
     userDetails.style.display = "flex"
@@ -29,5 +29,5 @@ changePasswordTab.addEventListener("click", () => {
     changePassword.style.display = "flex"
 })
 logout.addEventListener('click',()=>{
-    location.href = './index.html'
+    location.href = 'auth/Logout'
 })
