@@ -12,7 +12,7 @@ const db = mysql.createConnection({
 
 exports.admin = (req, res) => {
     try {
-        console.log(req.body);
+        // console.log(req.body);
         const username = req.body.adminName;
         const password = req.body.adminPassword;
 
@@ -21,13 +21,15 @@ exports.admin = (req, res) => {
             res.send("One field is empty");
         }
 
-        db.query('SELECT * FROM admin WHERE username = ?', [username], (error, results) => {
-            console.log(results);
-            if (!results || password != results[0].Password) {
+        db.query('SELECT * FROM admin WHERE admin_username = ?', [username], (error, results) => {
+            // console.log(results);
+            // console.log(username + " " + password);
+            if (!results || password != results[0].admin_password) {
                 //   res.status(401).render('admin', {message: 'Email or Password is incorrect'});
                 res.send("Email or Password is incorrect");
             } else {
-                res.send("Logged in!!");
+                // res.send("Logged in!!");
+                res.render('admin_Profile');
             }
         });
     } catch (error) {

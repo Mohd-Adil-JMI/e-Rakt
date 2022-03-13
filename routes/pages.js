@@ -82,6 +82,10 @@ router.get('/admin', (req, res) => {
   res.render('admin');
 });
 
+router.get('/admin_Profile', (req, res) => {
+  res.render('admin');
+});
+
 router.get('/profile', authController.isLoggedIn, (req, res) => {
   console.log(req.user);
   if (req.user) {

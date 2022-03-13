@@ -1,0 +1,144 @@
+body {
+    font-family: "Lato", sans-serif;
+  }
+.sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(221, 217, 217);
+    overflow-x: hidden;
+    padding-top: 20px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+  }
+  
+  .sidenav a {
+    padding: 6px 6px 6px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color:rgb(42, 50, 137);
+    display: block;
+    border-top: 1px solid rgb(81, 71, 71);
+  }
+  
+  .sidenav a:hover {
+    color: #f1f1f1;
+    background-color: rgb(172, 34, 34);
+  }
+  
+  .main {
+    margin-left: 250px; /* Same as the width of the sidenav */
+  }
+  
+  /* .sidenav input[type=text] {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+  } */
+  /* .sidenav .search-container {
+    float: right;
+  } */
+  
+  .sidenav input[type=text] {
+      /* float: left; */
+      width:70%;
+    padding: 6px;
+    margin-top: 8px;
+    margin-left:10px;
+    margin-bottom: 16px;
+    font-size: 17px;
+    border: none;
+  }
+  
+  .sidenav .search-container button {
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .sidenav .search-container button:hover {
+    background: #ccc;
+  }
+.search-container{
+    border-top: 1px solid rgb(81, 71, 71);
+}
+.last_a{
+    border-bottom: 1px solid rgb(81, 71, 71);
+}
+/* .sidenav #button1{
+  color: #f1f1f1;
+  background-color: rgb(171, 47, 47);
+}
+.sidenav #button1:hover{
+  background-color: red;
+ 
+} */
+
+/* BOXES */
+.admin_dashboard{
+  display: flex;
+  height: 82px;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  margin: 15px;
+}
+.Blood_banks{
+  display: none;
+  height: 82px;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  margin: 15px;
+}
+.add_donor{
+  display: none;
+  height: 82px;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  margin: 15px;
+}
+
+
+.view_details{
+  display: none;
+  height: 82px;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  margin: 15px;
+}
+.edit_details{
+  display: none;
+  height: 82px;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  margin: 15px;
+}
+.admins{
+  display: none;
+  height: 82px;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  margin: 15px;
+}
+.contact{
+  display: none;
+  height: 82px;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  margin: 15px;
+}
+
+
+
+h3{
+  float: left;
+  color: rgb(255, 255, 255);
+  margin-left: 10px;
+}
+h2{
+  /* float: left; */
+  color: white;
+}
