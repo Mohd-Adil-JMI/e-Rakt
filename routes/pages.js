@@ -1,59 +1,43 @@
 const express = require('express');
-const request = require('request');
 const authController = require('../controllers/auth');
-const authController2 = require('../controllers/auth2');
 const fs = require('fs');
 
 const router = express.Router();
 
-// To also test if user is logged in or not
-// router.get('/', (req, res) => {
-//   var user_Exist = "No";
-//   if (typeof req.user != "undefined") {
-//     user_Exist = "Yes";
-//   }
-//   res.render('index', { userExist: user_Exist });
-// });
-
-// always check if a person is logged in or not using this code in every post/get request :-
-router.get('/', authController.isLoggedIn, (req, res) => {
-  var user_Exist = "No";
-  if (typeof req.user != "undefined") {
-     user_Exist = "Yes";
+function isLoggedInOrNot(x){
+  if (typeof x != "undefined") {
+    return "Yes";
   }
+  return "No"
+}
+
+router.get('/', authController.isLoggedIn, (req, res) => {
+  var user_Exist = isLoggedInOrNot(req.user);
   res.render('index', { userExist: user_Exist });
 });
 
 router.get('/search',  authController.isLoggedIn, (req, res) => {
   var data = [];
-  var user_Exist = "No";
-  if (typeof req.user != "undefined") {
-     user_Exist = "Yes";
-  }
+  var user_Exist = isLoggedInOrNot(req.user);
   res.render('search', { results: data, userExist: user_Exist });
 });
 
 var Apidata = [];
 
 router.post('/search', (req, res) => {
+
+  var user_Exist = isLoggedInOrNot(req.user);
+
   const dataBuffer = fs.readFileSync('APIDATA.json');
   const JSONdata = dataBuffer.toString();
-  // console.log(JSON.parse(JSONdata).features);
   const features = JSON.parse(JSONdata).features;
-  // console.log(features);
   Apidata = features.filter((feature) => { return (feature.attributes.city == req.body.city && feature.attributes.state == req.body.state) });
-  // console.log(Apidata);
-  res.render('search', { results: Apidata, userExist: "Yes" });
-  // });
+  res.render('search', { results: Apidata, userExist: user_Exist });
 });
 
-router.get('/Stories',  authController.isLoggedIn, (req, res) => {
-  var data = [];
-  var user_Exist = "No";
-  if (typeof req.user != "undefined") {
-     user_Exist = "Yes";
-  }
-  res.render('Stories', { results: data, userExist: user_Exist });
+router.get('/story',  authController.isLoggedIn, (req, res) => {
+  var user_Exist = isLoggedInOrNot(req.user);
+  res.render('story', { userExist: user_Exist });
 });
 
 router.get('/SignUp', (req, res) => {
@@ -73,15 +57,13 @@ router.get('/U_profile', authController.isLoggedIn, (req, res) => {
 });
 
 router.post('/Donate_Buy', (req, res) => {
+  var user_Exist = isLoggedInOrNot(req.user);
   var results = req.body.SearchedName;
-  // console.log(Apidata[results]);
-  // console.log(results);
-  // console.log(Apidata[results]);
-  res.render('Donate_Buy', {arr:Apidata[results], userExist: "Yes"});
+  res.render('Donate_Buy', {arr:Apidata[results], userExist: user_Exist});
 });
 
 router.get('/LearnMore', (req, res) => {
-  var data = [];
+  var user_Exist = isLoggedInOrNot(req.user);
   res.render('LearnMore', {userExist: "Yes" });
 });
 
