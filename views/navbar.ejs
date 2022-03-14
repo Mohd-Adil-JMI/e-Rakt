@@ -1,0 +1,66 @@
+</head>
+
+<body>
+    <div class="containerBody">
+        <section class="logo">
+            <img src="img/logo.png" alt="error" srcset="">
+            <nav>
+                <div class="d-flex align-items-start basic">
+                    <div class="nav navbar nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="row">
+                        <button class="nav-link active" onclick="location.href='/'" id="v-pills-home-tab"
+                            data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab"
+                            aria-controls="v-pills-home" aria-selected="false"><i
+                                class="bi bi-house-door-fill"></i>Home</button>
+                        
+                            <button class="nav-link" id="v-pills-stories-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-stories" type="button" role="tab" aria-controls="v-pills-stories"
+                            aria-selected="false" onclick="location.href='/Stories'"><i class="bi bi-rss-fill"></i>Stories</button>
+
+                            <button class="nav-link" id="v-pills-donate-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-donate" type="button" role="tab" aria-controls="v-pills-donate"
+                            aria-selected="false" onclick="location.href='/search'"><i class="fa-solid fa-hand-holding-heart"></i>Search</button>
+                        
+                            <button class="nav-link" id="v-pills-learn-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-learn" type="button" role="tab" aria-controls="v-pills-learn"
+                            aria-selected="false"><i class="fa-brands fa-leanpub"></i>Learn</button>
+                        
+                            <button class="nav-link" id="v-pills-about-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-about" type="button" role="tab" aria-controls="v-pills-about"
+                            aria-selected="false"><i class="bi bi-file-earmark-person"></i></i>About</button>
+                        
+                            <button class="nav-link" onclick="location.href='#contact'" id="v-pills-contact-tab"
+                            data-bs-toggle="pill" data-bs-target="#v-pills-contact" type="button" role="tab"
+                            aria-controls="v-pills-contact" aria-selected="false"><i
+                                class="bi bi-telephone-fill"></i>Contact</button>
+                    </div>
+
+                </div>
+            </nav>
+            <div class="user">
+                <div class="btn-group">
+                    <button type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <% if(userExist=='No'){ %>
+                            <i class="bi bi-box-arrow-in-right"></i>
+                        <%}%>
+
+                        <% if(userExist=='Yes'){ %>
+                            <i class="bi bi-person-circle"></i>
+                        <%}%>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <% if(userExist=='No'){ %>
+                            <li><a class="dropdown-item" href="/Login">Sign In</a></li>
+                            <li><a class="dropdown-item" href="/SignUp">Sign Up</a></li>
+                            <li><a class="dropdown-item" href="/admin">Admin</a></li>
+                        <%}%>
+
+                        <% if(userExist=='Yes'){ %>
+                            <li><a class="dropdown-item" href="/U_profile">Profile</a></li>
+                            <li><a class="dropdown-item" href="auth/Logout">Logout</a></li>
+                        <% } %>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+        

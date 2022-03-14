@@ -21,8 +21,7 @@ router.get('/', authController.isLoggedIn, (req, res) => {
   if (typeof req.user != "undefined") {
      user_Exist = "Yes";
   }
-  console.log(user_Exist);
-res.render('index', { userExist: user_Exist });
+  res.render('index', { userExist: user_Exist });
 });
 
 router.get('/search',  authController.isLoggedIn, (req, res) => {
@@ -46,6 +45,15 @@ router.post('/search', (req, res) => {
   // console.log(Apidata);
   res.render('search', { results: Apidata, userExist: "Yes" });
   // });
+});
+
+router.get('/Stories',  authController.isLoggedIn, (req, res) => {
+  var data = [];
+  var user_Exist = "No";
+  if (typeof req.user != "undefined") {
+     user_Exist = "Yes";
+  }
+  res.render('Stories', { results: data, userExist: user_Exist });
 });
 
 router.get('/SignUp', (req, res) => {

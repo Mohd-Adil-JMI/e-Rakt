@@ -88,11 +88,12 @@ exports.isLoggedIn = async (req, res, next) => {
   if( req.cookies.jwt) {
     try {
       //1) verify the token
+      // console.log(req.cookies.jwt);
       const decoded = await promisify(jwt.verify)(req.cookies.jwt,
       process.env.JWT_SECRET
       );
 
-      console.log(decoded);
+      // console.log(decoded);
 
       //2) Check if the user still exists
      pool.query('SELECT * FROM users WHERE user_id = ?', [decoded.id], (error, result) => {
@@ -109,7 +110,7 @@ exports.isLoggedIn = async (req, res, next) => {
 
       });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return next();
     }
   } else {
