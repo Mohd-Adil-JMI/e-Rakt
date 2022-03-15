@@ -1,82 +1,41 @@
-const topLine = document.querySelector(".admin_dashboard");
-const secondLine=document.querySelector(".Blood_banks");
-const thirdLine=document.querySelector(".add_donor");
-const fourthLine=document.querySelector(".view_details");
-const fifthLine=document.querySelector(".edit_details");
-const sixthLine=document.querySelector(".admins");
-const seventhLine=document.querySelector(".contact");
+const toggle = document.querySelector(".toggle")
+const navbar = document.querySelector(".navbar")
+const items = document.querySelectorAll(".item")
+const contents = document.querySelectorAll(".content")
 
-
-
-
-const dash= document.querySelector('#button1');
-const bank= document.querySelector('#button2');
-const add= document.querySelector('#button3');
-const view= document.querySelector('#button4');
-const edit= document.querySelector('#button5');
-const admi= document.querySelector('#button6');
-const cont= document.querySelector('#button7');
-
-dash.addEventListener('click', ()=>{
-    topLine.style.display="flex"
-    secondLine.style.display="none"
-    thirdLine.style.display="none"
-    fourthLine.style.display="none"
-    fifthLine.style.display="none"
-    sixthLine.style.display="none"
-    seventhLine.style.display="none"
+toggle.addEventListener('click', ()=>{
+    toggle.classList.toggle('close')
+    navbar.classList.toggle('close')
 })
-bank.addEventListener('click', ()=>{
-    topLine.style.display="none"
-    secondLine.style.display="flex"
-    thirdLine.style.display="none"
-    fourthLine.style.display="none"
-    fifthLine.style.display="none"
-    sixthLine.style.display="none"
-    seventhLine.style.display="none"
-}) 
-add.addEventListener('click', ()=>{
-    topLine.style.display="none"
-    secondLine.style.display="none"
-    thirdLine.style.display="flex"
-    fourthLine.style.display="none"
-    fifthLine.style.display="none"
-    sixthLine.style.display="none"
-    seventhLine.style.display="none"
-}) 
-view.addEventListener('click', ()=>{
-    topLine.style.display="none"
-    secondLine.style.display="none"
-    thirdLine.style.display="none"
-    fourthLine.style.display="flex"
-    fifthLine.style.display="none"
-    sixthLine.style.display="none"
-    seventhLine.style.display="none"
-}) 
-edit.addEventListener('click', ()=>{
-    topLine.style.display="none"
-    secondLine.style.display="none"
-    thirdLine.style.display="none"
-    fourthLine.style.display="none"
-    fifthLine.style.display="flex"
-    sixthLine.style.display="none"
-    seventhLine.style.display="none"
-}) 
-admi.addEventListener('click', ()=>{
-    topLine.style.display="none"
-    secondLine.style.display="none"
-    thirdLine.style.display="none"
-    fourthLine.style.display="none"
-    fifthLine.style.display="none"
-    sixthLine.style.display="flex"
-    seventhLine.style.display="none"
-}) 
-cont.addEventListener('click', ()=>{
-    topLine.style.display="none"
-    secondLine.style.display="none"
-    thirdLine.style.display="none"
-    fourthLine.style.display="none"
-    fifthLine.style.display="none"
-    sixthLine.style.display="none"
-    seventhLine.style.display="flex"
-}) 
+let prv = contents[0];
+items.forEach((item,index)=>{
+    if (index==5) {
+        return;
+    }
+    item.addEventListener('click',()=>{
+        prv.classList.remove('active')
+        contents[index].classList.add('active')
+        prv = contents[index]
+    })
+})
+
+//media query
+function changeNav(x) {
+    if (x.matches) {
+        toggle.classList.add('close')
+        navbar.classList.add('close')
+    }
+    else{
+        toggle.classList.remove('close')
+        navbar.classList.remove('close')
+    }
+  }
+  
+  // Create a MediaQueryList object
+  const mediaObj = window.matchMedia("(max-width: 500px)")
+  
+  // Call the match function at run time:
+  changeNav(mediaObj);
+  
+  // Add the match function as a listener for state changes:
+  mediaObj.addEventListener(changeNav)

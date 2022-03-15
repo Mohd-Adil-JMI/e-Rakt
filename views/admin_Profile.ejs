@@ -6,74 +6,44 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/admin_Profile.css">
-  <link rel="stylesheet" media="screen and (max-width:650px)" href="phone.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <title>Admin</title>
 </head>
 
 <body>
-
-  <div class="sidenav">
-    <div class="search-container">
-      <form action="/action.php">
-        <input type="text" placeholder="Search.." name="search">
-        <button type="submit"><i class="fa fa-search"></i></button>
-      </form>
+  <nav class="navbar">
+    <div class="header">
+      <img src="/img/logo.png" alt="logo">
+      <div class="toggle">
+        <
+      </div>
     </div>
-    <a id="button1" href="#">Dashboard</a>
-    <a id="button2" href="#">Blood Banks</a>
-    <a id="button3" href="#">Add Donor</a>
-    <a id="button4" href="#">View Details</a>
-    <a id="button5" href="#">Edit Donor Details</a>
-   
-    <a id="button6" href="#">Admins</a>
-    <a id="button7" class="last_a" href="#">Contact</a>
-  </div>
-
-  <div class="main">
-   
-    <div class="admin_dashboard">
-     
-     <h1>Admin Dashboard</h1>
-      
+    <div class="nav-items">
+      <button class="item"><i class="fa-solid fa-chart-line"></i><span class="text">Dashboard</span></button>
+      <button class="item"><i class="fa-solid fa-building-columns"></i></i><span class="text">Blood Banks</span></button>
+      <button class="item"><i class="fa-solid fa-hand-holding-medical"></i><span class="text">Donors</span></button>
+      <button class="item"><i class="fa-solid fa-hospital-user"></i><span class="text">Patients</span></button>
+      <button class="item"><i class="fa-solid fa-toolbox"></i><span class="text">Admins</span></button>
+      <button class="item" onclick="location.href='/'"><i class="fa-solid fa-right-from-bracket"></i><span class="text">Logout</span></button>
     </div>
-  
-    <div class="Blood_banks">
-    
+  </nav>
+  <main class="container">
+    <div class="content dashboard active">
+      <h1>Admin Dashboard</h1>
+    </div>
+    <div class="content banks">
       <h1>Blood Banks</h1>
-      
     </div>
-
-    <div class="add_donor">
-    
-      <h1>Add Donor</h1>
-      
+    <div class="content donors">
+      <h1>Donors</h1>
     </div>
-    <div class="view_details">
-    
-      <h1>View Details</h1>
-    
+    <div class="content patients">
+      <h1>Patients</h1>
     </div>
-    <div class="edit_details">
-    
-      <h1>Edit Details</h1>
-      
-    </div>
-    <div class="admins">
-    
+    <div class="content admins">
       <h1>Admins</h1>
-      
     </div>
-
-    <div class="contact">
-    
-      <h1>Contact</h1>
-      
-    </div>
-
-
-
-  </div>
+  </main>
   <script src="/js/admin_Profile.js"></script>
 </body>
 

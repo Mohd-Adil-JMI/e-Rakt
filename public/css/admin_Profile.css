@@ -1,144 +1,97 @@
-body {
-    font-family: "Lato", sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+* {
+    font-family: "Poppins", sans-serif;
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+    list-style-type: none;
   }
-.sidenav {
-    height: 100%;
-    width: 250px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: rgb(221, 217, 217);
-    overflow-x: hidden;
-    padding-top: 20px;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-  }
-  
-  .sidenav a {
-    padding: 6px 6px 6px 32px;
-    text-decoration: none;
-    font-size: 20px;
-    color:rgb(42, 50, 137);
-    display: block;
-    border-top: 1px solid rgb(81, 71, 71);
-  }
-  
-  .sidenav a:hover {
-    color: #f1f1f1;
-    background-color: rgb(172, 34, 34);
-  }
-  
-  .main {
-    margin-left: 250px; /* Same as the width of the sidenav */
-  }
-  
-  /* .sidenav input[type=text] {
-    float: right;
-    padding: 6px;
-    border: none;
-    margin-top: 8px;
-    margin-right: 16px;
-    font-size: 17px;
-  } */
-  /* .sidenav .search-container {
-    float: right;
-  } */
-  
-  .sidenav input[type=text] {
-      /* float: left; */
-      width:70%;
-    padding: 6px;
-    margin-top: 8px;
-    margin-left:10px;
-    margin-bottom: 16px;
-    font-size: 17px;
-    border: none;
-  }
-  
-  .sidenav .search-container button {
-    float: right;
-    padding: 6px 10px;
-    margin-top: 8px;
-    margin-right: 16px;
-    background: #ddd;
-    font-size: 17px;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .sidenav .search-container button:hover {
-    background: #ccc;
-  }
-.search-container{
-    border-top: 1px solid rgb(81, 71, 71);
+:root{
+  --tran:all 0.2s ease;
+  --tran4:all 0.4s ease;
 }
-.last_a{
-    border-bottom: 1px solid rgb(81, 71, 71);
-}
-/* .sidenav #button1{
-  color: #f1f1f1;
-  background-color: rgb(171, 47, 47);
-}
-.sidenav #button1:hover{
-  background-color: red;
- 
-} */
-
-/* BOXES */
-.admin_dashboard{
+body{
   display: flex;
-  height: 82px;
-  border-bottom: 1px solid rgb(0, 0, 0);
-  margin: 15px;
 }
-.Blood_banks{
-  display: none;
-  height: 82px;
-  border-bottom: 1px solid rgb(0, 0, 0);
-  margin: 15px;
+.navbar{
+  position: sticky;
+  width: 264px;
+  height: 100vh;
+  background: #EEEEEE;
+  border-radius: 8px;
+  position: relative;
+  transition: var(--tran4);
 }
-.add_donor{
-  display: none;
-  height: 82px;
-  border-bottom: 1px solid rgb(0, 0, 0);
-  margin: 15px;
+.navbar.close{
+  width: 78px;
 }
 
-
-.view_details{
+.navbar .header{
+  width: 100%;
+  margin-bottom: 32px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+}
+.navbar .header img{
+  width: 90%;
+  margin: 0 auto;
+}
+.navbar .header .toggle{
+  cursor: pointer;
+  display: inline-flex;
+  width: 32px;
+  height: 32px;
+  background: #C70039;
+  color: #EEEEEE;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 50%;
+  right: -16px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: var(--tran4);
+}
+.toggle.close{
+  transform: rotateY(180deg);
+}
+.navbar .nav-items{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 8px;
+}
+.navbar .nav-items .item{
+  display: flex;
+  align-items: center;
+  width: 95%;
+  height: 48px;
+  font-size: 1.2rem;
+  outline: none;
+  border: none;
+  border-radius: 8px;
+  text-align: left;
+  transition: var(--tran);
+}
+.navbar.close .item .text{
   display: none;
-  height: 82px;
-  border-bottom: 1px solid rgb(0, 0, 0);
-  margin: 15px;
 }
-.edit_details{
+.fa-solid{
+  margin-right: 16px;
+  margin-left: 16px;
+}
+.navbar .nav-items .item:hover{
+  background: #C70039;
+  color: #EEEEEE;
+}
+main{
+  margin-top: 24px;
+  margin-left: 48px;
+}
+.container .content{
   display: none;
-  height: 82px;
-  border-bottom: 1px solid rgb(0, 0, 0);
-  margin: 15px;
 }
-.admins{
-  display: none;
-  height: 82px;
-  border-bottom: 1px solid rgb(0, 0, 0);
-  margin: 15px;
-}
-.contact{
-  display: none;
-  height: 82px;
-  border-bottom: 1px solid rgb(0, 0, 0);
-  margin: 15px;
-}
-
-
-
-h3{
-  float: left;
-  color: rgb(255, 255, 255);
-  margin-left: 10px;
-}
-h2{
-  /* float: left; */
-  color: white;
+.content.active{
+  display: block;
 }
