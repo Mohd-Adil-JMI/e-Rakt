@@ -21,9 +21,9 @@ app.use(cookieParser());
 //Define Routes
 app.use('/', require('./routes/pages'));
 app.use('/auth', require('./routes/auth'));
-
-app.listen(3000, function(){
-    console.log('Server has started at port 3000');
+const PORT = process.env.PORT || 3000
+app.listen(PORT, function(){
+    console.log('Server has started');
 });
 
 
