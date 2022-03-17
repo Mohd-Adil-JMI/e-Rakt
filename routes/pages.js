@@ -1,6 +1,7 @@
 const express = require('express');
 const authController = require('../controllers/auth');
 const fs = require('fs');
+const res = require('express/lib/response');
 
 const router = express.Router();
 
