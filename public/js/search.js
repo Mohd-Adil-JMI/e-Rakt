@@ -99,6 +99,10 @@ function loadDistrict(state, district) {
         var newoption = document.createElement("option");
         newoption.value = districtarray[options];
         newoption.innerHTML = districtarray[options];
+        if (newoption.value==="Select District") {
+            newoption.setAttribute('disabled','disabled')
+            newoption.setAttribute('selected','selected')
+        }
         district.options.add(newoption);
     }
 }
