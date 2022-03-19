@@ -145,11 +145,13 @@
                 </tbody>
             </table>
         <% } %>
-        <% if(results.length===0){ %>
+        
+            
+        <% if(results.length===0 && SearchedYet==1){ %>
             <div class="alert alert-danger" role="alert">
                 No Results Found!
             </div>
-        <% } %>
+        <% } %>  
 
 
 
