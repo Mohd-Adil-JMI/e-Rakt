@@ -106,3 +106,5 @@ function loadDistrict(state, district) {
         district.options.add(newoption);
     }
 }
+
+document.querySelector("#v-pills-donate-tab").classList.add("active");
