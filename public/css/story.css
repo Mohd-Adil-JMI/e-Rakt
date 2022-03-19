@@ -10,15 +10,8 @@
     scroll-behavior: smooth;
 }
 
-html {
-    margin: 0;
-    padding: 0;
-}
 body {
-    font-size: 13pt;
     background-color: #efefef;
-    padding: 10px;
-    margin: 0;
     position: relative;
     font-family:'Raleway',monospace;
 }
@@ -59,10 +52,7 @@ em {
     color: inherit;
     font-weight: bold;
 }
-/* * {
-    font-size: 1em;
-    color: #555;
-} */
+
 h1 span {
     border: 4px dashed #20bcd5;
     padding: 10px;
@@ -111,9 +101,7 @@ h1 span {
     width:166.23px;
     
   }
-a:active{
-       color:#ffd323;
-        } 
+
     button{
         user-select:none;
         -webkit-user-select:none;
@@ -174,11 +162,6 @@ a:active{
     margin: auto;
 }
 
-.SS{
-    margin: 2rem 0;
-}
-
-/* Logo */
 .logo{
     height: 128px;
     display: flex;

@@ -5,7 +5,7 @@ const fs = require('fs');
 const router = express.Router();
 var Apidata = [];
 router.get('/search', auth, (req, res) => {
-  res.render('search', { results: Apidata, userExist: "Yes" });
+  res.render('search', { searchedYet:false, results: Apidata, userExist: "Yes" });
 });
 
 router.post('/search', auth, (req, res) => {
@@ -13,7 +13,7 @@ router.post('/search', auth, (req, res) => {
   const JSONdata = dataBuffer.toString();
   const features = JSON.parse(JSONdata).features;
   Apidata = features.filter((feature) => { return (feature.attributes.city == req.body.city && feature.attributes.state == req.body.state) });
-  res.render('search', { results: Apidata, userExist: "Yes" });
+  res.render('search', { searchedYet:true, results: Apidata, userExist: "Yes" });
 });
 
 router.get('/story', auth, (req, res) => {
