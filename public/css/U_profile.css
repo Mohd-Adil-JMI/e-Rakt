@@ -110,12 +110,15 @@ nav{
 .user-details h3{
     border-bottom: 1px solid black;
 }
+.user-details form,.user-password form{
+    width: 100%;
+}
 .user-details .edit{
     position: absolute;
     right: 12px;
 }
 .info{
-    margin: 16px;
+    margin: auto;
     padding: 4px;
     width: 75%;
     display: flex;

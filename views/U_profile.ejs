@@ -34,16 +34,14 @@
                         <div class="info">
 
                             <label class="key" for="email">Email</label>
-                            <input class="value" type="text" name="email" id="email" value="<%= user.email %>" readonly>
+                            <input class="value" type="email" name="email" id="email" value="<%= user.email %>" readonly>
                             <label class="key" for="phone">Phone No</label>
                             <input class="value" type="text" name="phone" id="phone" value="<%= user.PhoneNo %>" readonly>
                             <label class="key" for="aadhar">Aadhar No</label>
                             <input class="value" type="text" name="aadhar" id="aadhar" value="<%= user.AadharNo %>" readonly>
                             <label class="key" for="address">Address</label>
                             <input class="value" type="text" name="address" id="address" value="<%= user.Address %>" readonly>
-                        </div>
-                        <div class="update">
-                            <button type="submit" class="btn btn-success" name="userID" value="<%= user.user_id %>">Update</button>
+                            <button type="submit" class="btn btn-success update" name="userID" value="<%= user.user_id %>">Update</button>
                         </div>
                     </form>
 
@@ -54,13 +52,11 @@
                     <form action="/auth/changePassword" method="post">
                         <div class="info">
                             <label class="key" for="oldP">Old Password</label>
-                            <input class="value" type="text" name="oldP" id="oldP">
+                            <input class="value" type="password" name="oldP" id="oldP">
                             <label class="key" for="newP">New Password</label>
-                            <input class="value" type="text" name="newP" id="newP">
+                            <input class="value" type="password" name="newP" id="newP">
                             <label class="key" for="confirmP">Confirm Password</label>
-                            <input class="value" type="text" name="confirmP" id="confirmP">
-                        </div>
-                        <div class="update">
+                            <input class="value" type="password" name="confirmP" id="confirmP">
                             <button type="submit" class="btn btn-success" name="userID"
                                 value="<%= user.user_id %>">Change Password</button>
                         </div>
