@@ -51,9 +51,11 @@ router.get('/Login', (req, res) => {
 
 router.get('/U_profile', authController.isLoggedIn, (req, res) => {
   if (typeof req.user != "undefined") {
-    res.render('U_profile', {userExist: "Yes"});
+    console.log(req.user);
+    res.render('U_profile', {userExist: "Yes", user : req.user});
   } else{
-    res.render('Login', {message:""});
+    // res.render('Login', {message:""});
+    res.redirect('/Login');
   }
 });
 

@@ -33,18 +33,18 @@
                     <div class="info">
 
                         <label class="key" for="email">Email</label>
-                        <input class="value" type="text" name="email" id="email" value="aadil97606@gmail.com" readonly>
+                        <input class="value" type="text" name="email" id="email" value="<%=user.email%>" readonly>
                         <label class="key" for="phone">Phone</label>
-                        <input class="value" type="text" name="phone" id="phone" value="aadil97606@gmail.com" readonly>
+                        <input class="value" type="text" name="phone" id="phone" value="<%=user.PhoneNo%>" readonly>
                         <label class="key" for="blood-group">Blood Group</label>
-                        <input class="value" type="text" name="blood-group" id="blood-group" value="A+" readonly>
+                        <input class="value" type="text" name="blood-group" id="blood-group" value="<%=user.BloodGrp%>" readonly>
                         <label class="key" for="dob">Date of Birth</label>
-                        <input class="value" type="text" name="dob" id="dob" value="XX/XX/XXXX" readonly>
+                        <input class="value" type="text" name="dob" id="dob" value="<%=user.DOB%>" readonly>
 
-                        <label class="key" for="age">Age</label>
-                        <input class="value" type="text" name="age" id="age" value="20" readonly>
+                        <!-- <label class="key" for="age">Age</label>
+                        <input class="value" type="text" name="age" id="age" value="<%=user.%>" readonly> -->
                         <label class="key" for="address">Address</label>
-                        <input class="value" type="text" name="address" id="address" value="Dhaura Tanda" readonly>
+                        <input class="value" type="text" name="address" id="address" value="<%=user.Address%>" readonly>
                     </div>
                     <div class="update">
                         <button type="button" class="btn btn-success">Update</button>
