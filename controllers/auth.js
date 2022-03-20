@@ -56,7 +56,7 @@ exports.SignUp = (req, res) => {
       return res.render('SignUp', {message: 'Passwords do not match'});
     }
 
-    let hashedPassword = await bcrypt.hash(password, 5);
+    let hashedPassword = await bcrypt.hash(password, 8);
     // console.log(hashedPassword);
 
     var insertObject = {
@@ -84,33 +84,22 @@ exports.SignUp = (req, res) => {
 }
 
 exports.isLoggedIn = async (req, res, next) => {
-  // console.log(req.cookies);
   if( req.cookies.jwt) {
     try {
-      //1) verify the token
-      // console.log(req.cookies.jwt);
       const decoded = await promisify(jwt.verify)(req.cookies.jwt,
       process.env.JWT_SECRET
       );
 
-      // console.log(decoded);
-
-      //2) Check if the user still exists
      pool.query('SELECT * FROM users WHERE user_id = ?', [decoded.id], (error, result) => {
-        // console.log(result);
-
         if(!result) {
           return next();
         }
 
         req.user = result[0];
-        // console.log("user is");
-        // console.log(req.user);
         return next();
 
       });
     } catch (error) {
-      // console.log(error);
       return next();
     }
   } else {
@@ -125,4 +114,43 @@ exports.Logout = async (req, res) => {
   });
 
   res.status(200).redirect('/');
+}
+
+exports.edit = async (req, res)=>{
+  const {email, phone, aadhar, address, userID} = req.body;
+
+  pool.query("UPDATE users SET email = ?, PhoneNo = ?, AadharNo = ?, Address = ? WHERE user_id = ?", [email, phone, aadhar
+  , address, userID], (err, result)=>{
+    if(err) console.log(err);
+    else{
+      console.log("done");
+      res.redirect('/U_profile');
+    } 
+  });
+}
+
+exports.changePassword = async (req, res) => {
+  const { oldP, newP, confirmP, userID } = req.body;
+
+  pool.query('SELECT Password FROM users WHERE user_id = ?', [userID], async (error, result) => {
+    if(!(await bcrypt.compare(oldP, result[0].Password))){
+      console.log("Password is incorrect!");
+    } 
+    else if(oldP===newP){
+      console.log("New Password cannot be same as old one");
+    }
+    else if(newP!=confirmP){
+      console.log("new passwords do not march");
+    } 
+    else{
+      let hashedNew = await bcrypt.hash(newP, 8);
+      pool.query('UPDATE users SET PASSWORD = ? WHERE user_id = ?', [hashedNew, userID], (err, results)=>{
+        if(err) console.log(err);
+        else{
+          console.log("updated");
+          res.redirect('/U_profile');
+        }
+      });
+    }
+  }); 
 }

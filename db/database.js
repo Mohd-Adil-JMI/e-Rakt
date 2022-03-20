@@ -21,32 +21,32 @@ const PurchaseSchema = "create table if not exists PurchaseHistory (PurchaseID i
 
 pool.query(DonationSchema, function(err, result){
     if(err) console.log(err);
-    else{
-        console.log(result);
-    }
+    // else{
+    //     console.log(result);
+    // }
 });
 
 pool.query(PurchaseSchema, function(err, result){
     if(err) console.log(err);
-    else{
-        console.log(result);
-    }
+    // else{
+    //     console.log(result);
+    // }
 });
 
 pool.query(userSchema,(error,result)=>{
     if (error) {
         console.log(error)
     }
-    else{
-        console.log(result)
-    }
+    // else{
+    //     console.log(result)
+    // }
 });
 pool.query(adminSchema,(error,result)=>{
     if (error) {
         console.log(error)
     }
-    else{
-        console.log(result)
-    }
+    // else{
+    //     console.log(result)
+    // }
 })
 module.exports = pool;

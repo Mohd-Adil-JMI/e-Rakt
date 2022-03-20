@@ -10,7 +10,9 @@ router.post('/Login', authController.Login );
 
 router.get('/Logout', authController.Logout );
 
+router.post('/changePassword', authController.changePassword);
 
+router.post('/edit', authController.edit);
 
 router.post('/admin', authController2.admin );
 

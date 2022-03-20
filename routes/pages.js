@@ -51,7 +51,7 @@ router.get('/Login', (req, res) => {
 
 router.get('/U_profile', authController.isLoggedIn, (req, res) => {
   if (typeof req.user != "undefined") {
-    console.log(req.user);
+    // console.log(req.user);
     res.render('U_profile', {userExist: "Yes", user : req.user});
   } else{
     // res.render('Login', {message:""});
@@ -77,17 +77,5 @@ router.get('/admin', (req, res) => {
 router.get('/admin_Profile', (req, res) => {
   res.render('admin');
 });
-
-router.get('/profile', authController.isLoggedIn, (req, res) => {
-  console.log(req.user);
-  if (req.user) {
-    res.render('profile', {
-      user: req.user
-    });
-  } else {
-    res.redirect('/login');
-  }
-
-})
 
 module.exports = router;

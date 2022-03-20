@@ -1,10 +1,10 @@
 <%- include("header") -%>
 
-<!-- <link rel="stylesheet" href="/css/style.css"> -->
-<link rel="stylesheet" href="/css/U_profile.css">
+    <!-- <link rel="stylesheet" href="/css/style.css"> -->
+    <link rel="stylesheet" href="/css/U_profile.css">
 
-<%- include("navbar") -%>
-    
+    <%- include("navbar") -%>
+
         <section class="profile">
             <div class="card">
                 <div class="d-flex align-items-start basic">
@@ -29,50 +29,50 @@
 
                 <div class="user-details">
                     <h3>Account Details</h3>
-                    <div class="edit" id="edit-details"><i class="bi bi-pencil-square"></i></div>
-                    <div class="info">
+                    <form action="/auth/edit" method="post">
+                        <div class="edit" id="edit-details"><i class="bi bi-pencil-square"></i></div>
+                        <div class="info">
 
-                        <label class="key" for="email">Email</label>
-                        <input class="value" type="text" name="email" id="email" value="<%=user.email%>" readonly>
-                        <label class="key" for="phone">Phone</label>
-                        <input class="value" type="text" name="phone" id="phone" value="<%=user.PhoneNo%>" readonly>
-                        <label class="key" for="blood-group">Blood Group</label>
-                        <input class="value" type="text" name="blood-group" id="blood-group" value="<%=user.BloodGrp%>" readonly>
-                        <label class="key" for="dob">Date of Birth</label>
-                        <input class="value" type="text" name="dob" id="dob" value="<%=user.DOB%>" readonly>
-
-                        <!-- <label class="key" for="age">Age</label>
-                        <input class="value" type="text" name="age" id="age" value="<%=user.%>" readonly> -->
-                        <label class="key" for="address">Address</label>
-                        <input class="value" type="text" name="address" id="address" value="<%=user.Address%>" readonly>
-                    </div>
-                    <div class="update">
-                        <button type="button" class="btn btn-success">Update</button>
-                    </div>
+                            <label class="key" for="email">Email</label>
+                            <input class="value" type="text" name="email" id="email" value="<%= user.email %>" readonly>
+                            <label class="key" for="phone">Phone No</label>
+                            <input class="value" type="text" name="phone" id="phone" value="<%= user.PhoneNo %>" readonly>
+                            <label class="key" for="aadhar">Aadhar No</label>
+                            <input class="value" type="text" name="aadhar" id="aadhar" value="<%= user.AadharNo %>" readonly>
+                            <label class="key" for="address">Address</label>
+                            <input class="value" type="text" name="address" id="address" value="<%= user.Address %>" readonly>
+                        </div>
+                        <div class="update">
+                            <button type="submit" class="btn btn-success" name="userID" value="<%= user.user_id %>">Update</button>
+                        </div>
+                    </form>
 
 
                 </div>
                 <div class="user-password">
                     <h3>Account Details</h3>
-                    <div class="info">
-                        <label class="key" for="old">Old Password</label>
-                        <input class="value" type="text" name="old" id="old" value="">
-                        <label class="key" for="new">New Password</label>
-                        <input class="value" type="text" name="new" id="new" value="">
-                        <label class="key" for="confirm">Confirm Password</label>
-                        <input class="value" type="text" name="confirm" id="confirm" value="">
-                    </div>
-                    <div class="update">
-                        <button type="button" class="btn btn-success">Change Password</button>
-                    </div>
+                    <form action="/auth/changePassword" method="post">
+                        <div class="info">
+                            <label class="key" for="oldP">Old Password</label>
+                            <input class="value" type="text" name="oldP" id="oldP">
+                            <label class="key" for="newP">New Password</label>
+                            <input class="value" type="text" name="newP" id="newP">
+                            <label class="key" for="confirmP">Confirm Password</label>
+                            <input class="value" type="text" name="confirmP" id="confirmP">
+                        </div>
+                        <div class="update">
+                            <button type="submit" class="btn btn-success" name="userID"
+                                value="<%= user.user_id %>">Change Password</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </section>
-    </div>
+        </div>
 
-    <%- include("footer") -%>
-    
-    <script src="./js/U_profile.js"></script>
-</body>
+        <%- include("footer") -%>
 
-</html>
+            <script src="./js/U_profile.js"></script>
+            </body>
+
+            </html>
