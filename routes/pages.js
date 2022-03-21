@@ -78,4 +78,6 @@ router.get('/admin_Profile', (req, res) => {
   res.render('admin');
 });
 
+router.delete('/U_profile/users/me',authController.isLoggedIn, authController.removeUser)
+
 module.exports = router;

@@ -14,8 +14,6 @@ router.post('/changePassword', authController.changePassword);
 
 router.post('/edit', authController.edit);
 
-router.delete('/users/me', authController.removeUser)
-
 router.post('/admin', authController2.admin );
 
 // router.get('/adminLogout', authController2.logout );

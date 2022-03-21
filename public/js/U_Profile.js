@@ -17,14 +17,11 @@ editDetails.addEventListener('click', () => {
     inputValues[0].focus()
 })
 
-deleteUser.addEventListener('click', async ()=>{
-    await fetch('../users/me',{method:'delete'})
-    // location.href='/'
-})
-home.addEventListener('click',()=>{
+deleteUser.addEventListener('click', async () => {
+    await fetch('/U_profile/users/me', { method: 'delete' })
     location.href = '/'
 })
-profileTab.addEventListener('click',()=>{
+profileTab.addEventListener('click', () => {
     userDetails.style.display = "flex"
     changePassword.style.display = "none"
 })
@@ -32,6 +29,6 @@ changePasswordTab.addEventListener("click", () => {
     userDetails.style.display = "none"
     changePassword.style.display = "flex"
 })
-logout.addEventListener('click',()=>{
+logout.addEventListener('click', () => {
     location.href = 'auth/Logout'
 })

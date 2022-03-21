@@ -156,18 +156,13 @@ exports.changePassword = async (req, res) => {
   });
 }
 exports.removeUser = async (req, res) => {
-  
-  console.log('running')
-  if (req.cookies.jwt) {
-    const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET)
-
-    pool.query('delete FROM users WHERE user_id = ?', [decoded.id], (error, result) => {
-      if (error) {
-        return res.send(error);
-      }
-      console.log('deleted')
-      console.log(result)
-      res.redirect('/')
-    });
-  }
+  const user_id = req.user.user_id
+  console.log(user_id)
+  pool.query('delete FROM users WHERE user_id = ?', [user_id], (error, result) => {
+    if (error) {
+      return res.status(401).send(error);
+    }
+    res.redirect('/')
+  });
+  pool
 }
