@@ -18,9 +18,9 @@ router.get('/', authController.isLoggedIn, (req, res) => {
 });
 
 var Apidata = [];
-const dataBuffer = fs.readFileSync('APIDATA.json');
+const dataBuffer = fs.readFileSync('api.json');
 const JSONdata = dataBuffer.toString();
-const features = JSON.parse(JSONdata).features;
+const data = JSON.parse(JSONdata).data;
 
 router.get('/search',  authController.isLoggedIn, (req, res) => {
   var user_Exist = isLoggedInOrNot(req.user);
@@ -32,8 +32,9 @@ router.post('/search', (req, res) => {
 
   var user_Exist = isLoggedInOrNot(req.user);
 
-  Apidata = features.filter((feature) => { return (feature.attributes.city == req.body.city && feature.attributes.state == req.body.state) });
+  Apidata = data.filter((bank) => { return (bank[2] == req.body.city && bank[1] == req.body.state) });
   res.render('search', { SearchedYet : 1, results: Apidata, userExist: user_Exist });
+  // res.send(Apidata)
 });
 
 router.get('/story',  authController.isLoggedIn, (req, res) => {

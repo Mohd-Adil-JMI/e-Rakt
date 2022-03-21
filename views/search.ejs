@@ -24,6 +24,7 @@
                                     <option value="Assam">Assam</option>
                                     <option value="Bihar">Bihar</option>
                                     <option value="Chhattisgarh">Chhattisgarh</option>
+                                    <option value="Delhi">Delhi</option>
                                     <option value="Goa">Goa</option>
                                     <option value="Gujarat">Gujarat</option>
                                     <option value="Haryana">Haryana</option>
@@ -120,19 +121,19 @@
                                 <%= i+1 %></i>
                             </th>
                             <td>
-                                <%= results[i].attributes.blood_bank_name %>
+                                <%= results[i][4] %>
                             </td>
                             <td>
-                                <%= results[i].attributes.address %>
+                                <%= results[i][5] %>
                             </td>
                             <td>
-                                <%= results[i].attributes.city %>
+                                <%= results[i][2] %>
                             </td>
                             <td>
-                                <%= results[i].attributes.state %>
+                                <%= results[i][1] %>
                             </td>
                             <td>
-                                <%= results[i].attributes.contact_no %>
+                                <%= results[i][7] %>
                             </td>
                             <td>
                                 <form action="/Donate_Buy" method="post">
