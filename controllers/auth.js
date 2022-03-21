@@ -11,7 +11,7 @@ exports.Login = async (req, res) => {
 
     pool.query('SELECT * FROM users WHERE email = ?', [email], async (error, results) => {
       // console.log(results);
-      if( !results || !(await bcrypt.compare(password, results[0].Password)) ) {
+      if (!results || !(await bcrypt.compare(password, results[0].Password))) {
         // res.status(401).render('Login', {message: 'Email or Password is incorrect'});
         res.redirect('/Login')
       } else {
@@ -30,7 +30,7 @@ exports.Login = async (req, res) => {
           httpOnly: true
         }
 
-        res.cookie('jwt', token, cookieOptions );
+        res.cookie('jwt', token, cookieOptions);
         res.status(200).redirect("/");
       }
 
@@ -44,37 +44,37 @@ exports.Login = async (req, res) => {
 exports.SignUp = (req, res) => {
   // console.log(req.body);
 
-  const { fname, lname, email, phoneNo, password, Cpassword, dob, aadharNo, add, bloodgrp, gender} = req.body;
+  const { fname, lname, email, phoneNo, password, Cpassword, dob, aadharNo, add, bloodgrp, gender } = req.body;
 
   pool.query('SELECT email FROM users WHERE email = ?', [email], async (error, results) => {
-    if(error) {
+    if (error) {
       console.log(error);
     }
 
-    if( results.length > 0 ) {
-      return res.render('SignUp', {message: 'That email is already in use'});
-    } else if( password !== Cpassword ) {
-      return res.render('SignUp', {message: 'Passwords do not match'});
+    if (results.length > 0) {
+      return res.render('SignUp', { message: 'That email is already in use' });
+    } else if (password !== Cpassword) {
+      return res.render('SignUp', { message: 'Passwords do not match' });
     }
 
     let hashedPassword = await bcrypt.hash(password, 8);
     // console.log(hashedPassword);
 
     var insertObject = {
-      First_Name:fname,
-      Last_Name:lname,
-      email:email,
-      PhoneNo:phoneNo,
-      Password:hashedPassword,
-      DOB:dob,
-      AadharNo:aadharNo,
-      Address:add,
-      BloodGrp:bloodgrp,
-      Gender:gender
+      First_Name: fname,
+      Last_Name: lname,
+      email: email,
+      PhoneNo: phoneNo,
+      Password: hashedPassword,
+      DOB: dob,
+      AadharNo: aadharNo,
+      Address: add,
+      BloodGrp: bloodgrp,
+      Gender: gender
     }
 
     pool.query('INSERT INTO users SET ?', insertObject, (error, results) => {
-      if(error) {
+      if (error) {
         console.log(error);
       } else {
         // console.log(results);
@@ -85,14 +85,14 @@ exports.SignUp = (req, res) => {
 }
 
 exports.isLoggedIn = async (req, res, next) => {
-  if( req.cookies.jwt) {
+  if (req.cookies.jwt) {
     try {
       const decoded = await promisify(jwt.verify)(req.cookies.jwt,
-      process.env.JWT_SECRET
+        process.env.JWT_SECRET
       );
 
-     pool.query('SELECT * FROM users WHERE user_id = ?', [decoded.id], (error, result) => {
-        if(!result) {
+      pool.query('SELECT * FROM users WHERE user_id = ?', [decoded.id], (error, result) => {
+        if (!result) {
           return next();
         }
 
@@ -110,48 +110,64 @@ exports.isLoggedIn = async (req, res, next) => {
 
 exports.Logout = async (req, res) => {
   res.cookie('jwt', 'logout', {
-    expires: new Date(Date.now() + 2*1000),
+    expires: new Date(Date.now() + 2 * 1000),
     httpOnly: true
   });
 
   res.status(200).redirect('/');
 }
 
-exports.edit = async (req, res)=>{
-  const {email, phone, aadhar, address, userID} = req.body;
+exports.edit = async (req, res) => {
+  const { email, phone, aadhar, address, userID } = req.body;
 
   pool.query("UPDATE users SET email = ?, PhoneNo = ?, AadharNo = ?, Address = ? WHERE user_id = ?", [email, phone, aadhar
-  , address, userID], (err, result)=>{
-    if(err) console.log(err);
-    else{
-      console.log("done");
-      res.redirect('/U_profile');
-    } 
-  });
+    , address, userID], (err, result) => {
+      if (err) console.log(err);
+      else {
+        console.log("done");
+        res.redirect('/U_profile');
+      }
+    });
 }
 
 exports.changePassword = async (req, res) => {
   const { oldP, newP, confirmP, userID } = req.body;
 
   pool.query('SELECT Password FROM users WHERE user_id = ?', [userID], async (error, result) => {
-    if(!(await bcrypt.compare(oldP, result[0].Password))){
+    if (!(await bcrypt.compare(oldP, result[0].Password))) {
       console.log("Password is incorrect!");
-    } 
-    else if(oldP===newP){
+    }
+    else if (oldP === newP) {
       console.log("New Password cannot be same as old one");
     }
-    else if(newP!=confirmP){
+    else if (newP != confirmP) {
       console.log("new passwords do not march");
-    } 
-    else{
+    }
+    else {
       let hashedNew = await bcrypt.hash(newP, 8);
-      pool.query('UPDATE users SET PASSWORD = ? WHERE user_id = ?', [hashedNew, userID], (err, results)=>{
-        if(err) console.log(err);
-        else{
+      pool.query('UPDATE users SET PASSWORD = ? WHERE user_id = ?', [hashedNew, userID], (err, results) => {
+        if (err) console.log(err);
+        else {
           console.log("updated");
           res.redirect('/U_profile');
         }
       });
     }
-  }); 
+  });
+}
+exports.removeUser = async (req, res) => {
+  
+  console.log('running')
+  if (req.cookies.jwt) {
+    const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET)
+
+    pool.query('delete FROM users WHERE user_id = ?', [decoded.id], (error, result) => {
+      if (error) {
+        return res.send(error);
+      }
+      console.log('deleted')
+      console.log(result)
+      res.redirect('/')
+    });
+  }
 }

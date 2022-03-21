@@ -1,6 +1,6 @@
 const userDetails = document.querySelector(".user-details")
 const changePassword = document.querySelector(".user-password")
-const home = document.querySelector('#v-pills-home-tab')
+const deleteUser = document.querySelector('#v-pills-delete-tab')
 const profileTab = document.querySelector('#v-pills-profile-tab')
 const changePasswordTab = document.querySelector('#v-pills-password-tab')
 const logout = document.querySelector('#v-pills-logout-tab')
@@ -17,6 +17,10 @@ editDetails.addEventListener('click', () => {
     inputValues[0].focus()
 })
 
+deleteUser.addEventListener('click', async ()=>{
+    await fetch('../users/me',{method:'delete'})
+    // location.href='/'
+})
 home.addEventListener('click',()=>{
     location.href = '/'
 })
