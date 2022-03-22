@@ -21,6 +21,9 @@ function loadDistrict(state, district) {
     if (state.value == "Chhattisgarh") {
         var districtarray = ["Select District", "Balod", "Baloda Bazar", "Balrampur", "Bastar", "Bemetara", "Bijapur", "Bilaspur", "Dantewada", "Dhamtari", "Durg", "Gariaband", "Janjgir Champa", "Jashpur", "Kabirdham", "Kanker", "Kondagaon", "Korba", "Koriya", "Mahasamund", "Mungeli", "Narayanpur", "Raigarh", "Raipur", "Rajnandgaon", "Sukma", "Surajpur", "Surguja"];
     }
+    if (state.value == "Delhi") {
+        var districtarray = ["Select District", "Delhi", "New Delhi"];
+    }
     if (state.value == "Goa") {
         var districtarray = ["Select District", "North Goa", "South Goa"];
     }
