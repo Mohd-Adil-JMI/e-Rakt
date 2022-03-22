@@ -56,18 +56,21 @@
                             <input class="value" type="password" name="newP" id="newP">
                             <label class="key" for="confirmP">Confirm Password</label>
                             <input class="value" type="password" name="confirmP" id="confirmP">
-                            <button type="submit" class="btn btn-success" name="userID"
-                                value="<%= user.user_id %>">Change Password</button>
+                            <button type="submit" class="btn btn-success" name="userID" value="<%= user.user_id %>">Change Password</button>
+                            <div class="alert alert-danger error-msg" role="alert">
+                                A simple danger alert—check it out!
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
+            
         </section>
         </div>
 
-        <%- include("footer") -%>
+    <%- include("footer") -%>
 
-            <script src="./js/U_profile.js"></script>
-            </body>
+    <script src="./js/U_profile.js"></script>
+    </body>
 
-            </html>
+</html>

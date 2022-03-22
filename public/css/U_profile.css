@@ -150,6 +150,16 @@ nav{
     position: relative;
     margin: 8px;
 }
+
+.alert-danger {
+    margin-top: 1.5rem;
+}
+
+.btn-success {
+    background-color: #c91f42;
+    border-color: #C91F42;
+}
+
 /* footer (Contact us) */
 footer{
     margin-top: 5rem;
