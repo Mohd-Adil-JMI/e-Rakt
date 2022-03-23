@@ -29,12 +29,10 @@ router.get('/search',  authController.isLoggedIn, (req, res) => {
 
 
 router.post('/search', (req, res) => {
-
   var user_Exist = isLoggedInOrNot(req.user);
 
   Apidata = data.filter((bank) => { return (bank[2] == req.body.city && bank[1] == req.body.state) });
   res.render('search', { SearchedYet : 1, results: Apidata, userExist: user_Exist });
-  // res.send(Apidata)
 });
 
 router.get('/story',  authController.isLoggedIn, (req, res) => {
@@ -51,11 +49,15 @@ router.get('/Login', (req, res) => {
 });
 
 router.get('/U_profile', authController.isLoggedIn, (req, res) => {
+  
+  var ProfileErr = {
+    Acc_err:"",
+    Pass_err:""
+  }
+  
   if (typeof req.user != "undefined") {
-    // console.log(req.user);
-    res.render('U_profile', {userExist: "Yes", user : req.user});
+    res.render('U_profile', {userExist: "Yes", user : req.user, err:ProfileErr});
   } else{
-    // res.render('Login', {message:""});
     res.redirect('/Login');
   }
 });

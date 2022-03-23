@@ -4,15 +4,14 @@ const bcrypt = require('bcryptjs');
 const { promisify } = require('util');
 
 const pool = require('../db/database');
+var ProfileData = require('../routes/pages');
 
 exports.Login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
     pool.query('SELECT * FROM users WHERE email = ?', [email], async (error, results) => {
-      // console.log(results);
       if (!results || !(await bcrypt.compare(password, results[0].Password))) {
-        // res.status(401).render('Login', {message: 'Email or Password is incorrect'});
         res.redirect('/Login')
       } else {
         const id = results[0].user_id;
@@ -20,8 +19,6 @@ exports.Login = async (req, res) => {
         const token = jwt.sign({ id }, process.env.JWT_SECRET, {
           expiresIn: process.env.JWT_EXPIRES_IN
         });
-
-        // console.log("The token is: " + token);
 
         const cookieOptions = {
           expires: new Date(
@@ -31,7 +28,7 @@ exports.Login = async (req, res) => {
         }
 
         res.cookie('jwt', token, cookieOptions);
-        res.status(200).redirect("/");
+        res.status(200).redirect("/U_profile");
       }
 
     })
@@ -42,8 +39,6 @@ exports.Login = async (req, res) => {
 }
 
 exports.SignUp = (req, res) => {
-  // console.log(req.body);
-
   const { fname, lname, email, phoneNo, password, Cpassword, dob, aadharNo, add, bloodgrp, gender } = req.body;
 
   pool.query('SELECT email FROM users WHERE email = ?', [email], async (error, results) => {
@@ -58,7 +53,6 @@ exports.SignUp = (req, res) => {
     }
 
     let hashedPassword = await bcrypt.hash(password, 8);
-    // console.log(hashedPassword);
 
     var insertObject = {
       First_Name: fname,
@@ -77,8 +71,7 @@ exports.SignUp = (req, res) => {
       if (error) {
         console.log(error);
       } else {
-        // console.log(results);
-        return res.status(200).redirect('/');
+        return res.status(200).redirect('/SignUp');
       }
     });
   });
@@ -117,31 +110,74 @@ exports.Logout = async (req, res) => {
   res.status(200).redirect('/');
 }
 
+function getUser(userID){
+  var res;
+  pool.query('SELECT * FROM users where user_id = ?', [userID], (err, result)=>{
+    if(err) console.log(err);
+
+    console.log(result[0]);
+    return result[0];
+  });
+}
+
 exports.edit = async (req, res) => {
   const { email, phone, aadhar, address, userID } = req.body;
 
-  pool.query("UPDATE users SET email = ?, PhoneNo = ?, AadharNo = ?, Address = ? WHERE user_id = ?", [email, phone, aadhar
-    , address, userID], (err, result) => {
-      if (err) console.log(err);
-      else {
-        console.log("done");
-        res.redirect('/U_profile');
-      }
-    });
+  var ProfileErr = {
+    Acc_err:"",
+    Pass_err:""
+  }
+
+  var userDetails;
+
+  pool.query('SELECT * FROM users where user_id = ?', [userID], (err, result)=>{
+    if(err) console.log(err);
+
+    if(phone.length<10){
+      ProfileErr.Acc_err = "Enter correct Phone Number";
+      res.render('U_profile', {userExist:"Yes", user:result[0], err:ProfileErr});
+    }
+    else if(aadhar.length!=12){
+      ProfileErr.Acc_err = "Enter correct Aadhar Number";
+      res.render('U_profile', {userExist:"Yes", user:result[0], err:ProfileErr});
+    }
+  
+    else{
+      pool.query("UPDATE users SET email = ?, PhoneNo = ?, AadharNo = ?, Address = ? WHERE user_id = ?", [email, phone, aadhar
+        , address, userID], (err, result) => {
+        if (err) console.log(err);
+        else {
+          console.log("done");
+          res.redirect('/U_profile');
+        }
+      });
+    }
+  });
 }
 
 exports.changePassword = async (req, res) => {
   const { oldP, newP, confirmP, userID } = req.body;
 
-  pool.query('SELECT Password FROM users WHERE user_id = ?', [userID], async (error, result) => {
+  var ProfileErr = {
+    Acc_err:"",
+    Pass_err:""
+  }
+
+  pool.query('SELECT * FROM users WHERE user_id = ?', [userID], async (error, result) => {
     if (!(await bcrypt.compare(oldP, result[0].Password))) {
       console.log("Password is incorrect!");
+      ProfileErr.Pass_err = "Password is incorrect!";
+      res.render('U_profile', {userExist:"Yes", user:result[0], err:ProfileErr});
     }
     else if (oldP === newP) {
       console.log("New Password cannot be same as old one");
+      ProfileErr.Pass_err = "New Password cannot be same as old one";
+      res.render('U_profile', {userExist:"Yes", user:result[0], err:ProfileErr});
     }
     else if (newP != confirmP) {
-      console.log("new passwords do not march");
+      console.log("New passwords do not match");
+      ProfileErr.Pass_err = "new passwords do not match";
+      res.render('U_profile', {userExist:"Yes", user:result[0], err:ProfileErr});
     }
     else {
       let hashedNew = await bcrypt.hash(newP, 8);
