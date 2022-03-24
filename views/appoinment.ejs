@@ -7,6 +7,9 @@
             <div class="container">
                 <h3 class="text-danger text-center">Erakt Appoinment Details</h3>
                 <div id="Pdetails">
+                    <p><b>Bank ID : </b>
+                        <%= details.BankID %>
+                    </p>
                     <p><b>Bank Name : </b>
                         <%= details.BankName %>
                     </p>
@@ -35,7 +38,9 @@
                             <th scope="col">Blood Group</th>
                             <th scope="col">Age</th>
                             <th scope="col">Secret Code</th>
-
+                            <% if(details.type=="Purchase"){ %>
+                                <th scope="col">Bill</th>
+                            <% } %>
                         </tr>
                     </thead>
                     <tbody id="tablebody">
@@ -53,6 +58,12 @@
                                 <%= details.PAge %>
                             </td>
                             <td><%= details.Scode %></td>
+
+                            <% if(details.type=="Purchase"){ %>
+                                <td>
+                                    ₹ <%= details.units * 2000 %>/-
+                                </td>
+                            <% } %>
                         </tr>
                     </tbody>
                 </table>

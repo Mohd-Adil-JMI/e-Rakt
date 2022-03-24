@@ -185,6 +185,6 @@ footer hr{
     margin-top: 10px;
 }
 
-.hidden{
-    visibility: hidden;
+#hidden{
+    display: none;
 }

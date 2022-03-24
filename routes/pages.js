@@ -91,6 +91,22 @@ router.post('/Donate_Buy',  authController.isLoggedIn, (req, res) => {
 
 router.post('/appoinment',  authController.isLoggedIn, (req, res) => {
   var user_Exist = isLoggedInOrNot(req.user);
+
+  var AppointmentDetails = {
+    CustomerID : req.user.user_id,
+    Transaction_type : req.body.type,
+    TransactionDate : req.body.Adate,
+    BankID : req.body.BankID,
+    BloodGrp : req.body.PBldgrp,
+    Amount : req.body.units,
+    Bill : req.body.units*2000
+  }
+
+  pool.query('INSERT INTO logs SET ?', AppointmentDetails, (err, result)=>{
+    if(err) console.log(err);
+    else console.log('done');
+  })
+
   res.render('appoinment', {details:req.body, userExist:user_Exist});
 });
 

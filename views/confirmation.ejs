@@ -15,74 +15,85 @@
                         <div class="row">
 
                             <form action="/appoinment" method="post">
-                                <div class="form-group  col-md-5 d-inline-block form-div-left">
-                                    <label for="PatientName">Name</label>
-                                    <input type="text" class="form-control" id="PatientName" name="PatientName" value="<%= user.First_Name %> <%= user.Last_Name %>" readonly>
-                                </div>
-                                <div class="form-group  col-md-5 d-inline-block form-div-right">
-                                    <label for="type">Type</label>
-                                    <select name="type" id="type" class="form-select "
-                                        aria-label=".form-select-lg example" required>
-                                        <option value="" disabled selected>Select</option>
-                                        <option value="Donate">Donate</option>
-                                        <option value="Purchase">Purchase</option>
-                                    </select>
-                                </div>
-                                <div class="form-group  col-md-11 d-inline-block form-div">
-                                    <label for=BankName">Bank Name</label>
-                                    <input type="text" class="form-control" id="BankName" name="BankName"
-                                        value="<%=arr[4] %>" readonly>
-                                </div>
-                                <div class="form-group  col-md-11 d-inline-block form-div">
-                                    <label for=BankAdd">Bank Address</label>
-                                    <input type="text" class="form-control" id="BankAdd" name="BankAdd"
-                                        value="<%=arr[5] %>" readonly>
-                                </div>
-                                <div class="form-group  col-md-5 d-inline-block form-div-left">
-                                    <label for="Adate">Appoinment Date</label>
-                                    <select name="Adate" id="Adate" class="form-select "
-                                        aria-label=".form-select-lg example" required>
-                                    </select>
-                                </div>
-                                <div class="form-group  col-md-5 d-inline-block form-div-right">
-                                    <label for="Atime">Appoinment Time</label>
-                                    <select name="Atime" id="Atime" class="form-select "
-                                        aria-label=".form-select-lg example" required>
-                                        <option value="" disabled selected>Select</option>
-                                        <option value="10am-11am">10am-11am</option>
-                                        <option value="11am-12noon">11am-12noon</option>
-                                        <option value="12noon-1pm">12noon-1pm</option>
-                                        <option value="2pm-3pm">2pm-3pm</option>
-                                        <option value="3pm-4pm">3pm-4pm</option>
-                                    </select>
-                                </div>
+                                <div id="form-container">
+                                    <div class="form-group  col-md-5 d-inline-block form-div-left">
+                                        <label for="PatientName">Name</label>
+                                        <input type="text" class="form-control" id="PatientName" name="PatientName"
+                                            value="<%= user.First_Name %> <%= user.Last_Name %>" readonly>
+                                    </div>
+                                    <div class="form-group  col-md-5 d-inline-block form-div-right">
+                                        <label for="type">Type</label>
+                                        <select name="type" id="type" class="form-select "
+                                            aria-label=".form-select-lg example" required>
+                                            <option value="" disabled selected>Select</option>
+                                            <option value="Donate">Donate</option>
+                                            <option value="Purchase">Purchase</option>
+                                        </select>
+                                    </div>
 
-                                <div class="form-group  col-md-5 d-inline-block form-div-left">
-                                    <label for="PAge">Age</label>
-                                    <input type="text" class="form-control" id="PAge" name="PAge" required>
-                                </div>
+                                    <div id="hidden">
+                                        <input type="" name="BankID" id="BankID" value="<%= arr[0] %>">
+                                    </div>
 
-                                <div class="form-group  col-md-5 d-inline-block form-div-right">
-                                    <label for="PGender">Gender</label>
-                                    <input name="PGender" id="PGender" class="form-select" value="<%= user.Gender %>" readonly>
-                                </div>
+                                    <div class="form-group  col-md-11 d-inline-block form-div">
+                                        <label for=BankName">Bank Name</label>
+                                        <input type="text" class="form-control" id="BankName" name="BankName"
+                                            value="<%=arr[4] %>" readonly>
+                                    </div>
+                                    <div class="form-group  col-md-11 d-inline-block form-div">
+                                        <label for=BankAdd">Bank Address</label>
+                                        <input type="text" class="form-control" id="BankAdd" name="BankAdd"
+                                            value="<%=arr[5] %>" readonly>
+                                    </div>
+                                    <div class="form-group  col-md-5 d-inline-block form-div-left">
+                                        <label for="Adate">Appoinment Date</label>
+                                        <select name="Adate" id="Adate" class="form-select "
+                                            aria-label=".form-select-lg example" required>
+                                        </select>
+                                    </div>
+                                    <div class="form-group  col-md-5 d-inline-block form-div-right">
+                                        <label for="Atime">Appoinment Time</label>
+                                        <select name="Atime" id="Atime" class="form-select "
+                                            aria-label=".form-select-lg example" required>
+                                            <option value="" disabled selected>Select</option>
+                                            <option value="10am-11am">10am-11am</option>
+                                            <option value="11am-12noon">11am-12noon</option>
+                                            <option value="12noon-1pm">12noon-1pm</option>
+                                            <option value="2pm-3pm">2pm-3pm</option>
+                                            <option value="3pm-4pm">3pm-4pm</option>
+                                        </select>
+                                    </div>
 
-                                <div class="form-group  col-md-5 d-inline-block form-div-left">
-                                    <label for="PBldgrp">Blood Group</label>
-                                    <input type="text" name="PBldgrp" id="PBldgrp" class="form-control" value="<%= user.BloodGrp %>" readonly>
-                                </div>
+                                    <div class="form-group  col-md-5 d-inline-block form-div-left">
+                                        <label for="PAge">Age</label>
+                                        <input type="text" class="form-control" id="PAge" name="PAge" required>
+                                    </div>
 
-                                <div id="unit-div" class="form-group  col-md-5 d-inline-block form-div-right">
-                                    <label for="units">Units</label>
-                                    <select name="units" id="units" class="form-select "
-                                        aria-label=".form-select-lg example">
-                                        <option value="" disabled selected>Select</option>
-                                        <option value="10am-11am">1 unit</option>
-                                        <option value="11am-12noon">2 units</option>
-                                        <option value="12noon-1pm">4 units</option>
-                                        <option value="2pm-3pm">8 units</option>
-                                        <option value="3pm-4pm">16 units</option>
-                                    </select>
+                                    <div class="form-group  col-md-5 d-inline-block form-div-right">
+                                        <label for="PGender">Gender</label>
+                                        <input name="PGender" id="PGender" class="form-select"
+                                            value="<%= user.Gender %>" readonly>
+                                    </div>
+
+                                    <div class="form-group  col-md-5 d-inline-block form-div-left">
+                                        <label for="PBldgrp">Blood Group</label>
+                                        <input type="text" name="PBldgrp" id="PBldgrp" class="form-control"
+                                            value="<%= user.BloodGrp %>" readonly>
+                                    </div>
+
+                                    <div id="unit-div" class="form-group  col-md-5 d-inline-block form-div-right">
+                                        <label for="units">Units</label>
+                                        <select name="units" id="units" class="form-select "
+                                            aria-label=".form-select-lg example" required>
+                                            <option value="" disabled selected>Select</option>
+                                            <option value="1">1 unit</option>
+                                            <option value="2">2 units</option>
+                                            <option value="4">4 units</option>
+                                            <option value="8">8 units</option>
+                                            <option value="16">16 units</option>
+                                        </select>
+                                    </div>
+
                                 </div>
 
                                 <br>
@@ -98,14 +109,14 @@
 
                 </div>
             </div>
-            
+
         </section>
 
-    </div>
+        </div>
 
         <%- include("footer") -%>
 
             <script src="/js/confirmation.js"></script>
-</body>
+            </body>
 
-</html>
+            </html>

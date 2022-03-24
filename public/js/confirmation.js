@@ -4,27 +4,38 @@ var html = `<option value="" disabled selected>Select</option>`
 
 for (var i = 1; i <= 5; i++) {
     var tomorrow = new Date();
-    tomorrow.setDate(new Date().getDate() + i);;
-    var date1 = tomorrow.getDate() + '-' + (tomorrow.getMonth() + 1) + '-' + tomorrow.getFullYear();
-    console.log(date1)
-    html += `<option value="${date1}">${date1}</option>`
+    tomorrow.setDate(new Date().getDate() + i);
+    var addZeroMonth = "";
+    var addZeroDays = "";
+
+    if(tomorrow.getMonth()+1 < 10){
+        addZeroMonth = "0"    
+    }
+    if(tomorrow.getDate() < 10){
+        addZeroDays = "0"
+    }
+    var date1 = addZeroDays + tomorrow.getDate() + '-' + addZeroMonth + (tomorrow.getMonth() + 1) + '-' + tomorrow.getFullYear();
+    var date1Val = tomorrow.getFullYear() + addZeroMonth + (tomorrow.getMonth()+1) + addZeroDays + tomorrow.getDate();
+    // console.log(date1)
+    html += `<option value="${date1Val}">${date1}</option>`
 }
 
 Adate.innerHTML = html;
 
 var type = document.getElementById('type');
 var units = document.getElementById('unit-div');
-let user;
+var formContainer = document.querySelector('#form-container');
 
 type.addEventListener('change', ()=>{
-    user = type.value;
-    console.log(user);
+    let user = type.value;
 
-    if(user!='Purchase'){
-        units.classList.toggle('hidden');
+    if(user=='Donate'){
+        formContainer.removeChild(units);
+    }
+    else if(user=='Purchase'){
+        formContainer.appendChild(units);
     }
 })
-
 
 
 const Scode = document.getElementById('searchButton')
