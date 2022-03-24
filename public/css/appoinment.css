@@ -1,0 +1,49 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+
+.container, #appdetials, #indDetails, .footercontainer {
+    width: 80vw;
+    /* margin: auto; */
+    margin: 10px;
+
+}
+#indDetails{
+    margin-left: 0px;
+}
+
+.btn-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+
+}
+
+.btn {
+    margin: 20px 8px;
+}
+
+.btn a {
+    text-decoration: none;
+    color: white;
+}
+
+.container-body {
+    width: 80vw;
+    margin: auto;
+    border: 1px solid black;
+    margin-top: 20px;
+}
+
+.table {
+    width: 94%;
+    margin: auto;
+}
+.logo img {
+    height: 63px;
+}

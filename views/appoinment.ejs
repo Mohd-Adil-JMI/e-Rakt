@@ -1,0 +1,86 @@
+<%- include("header") -%>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/appoinment.css">
+
+    <%- include("navbar") -%>
+        <div class="container-body">
+            <div class="container">
+                <h3 class="text-danger text-center">Erakt Appoinment Details</h3>
+                <div id="Pdetails">
+                    <p><b>Bank Name : </b>
+                        <%= details.BankName %>
+                    </p>
+                    <p><b>Bank Address : </b>
+                        <%= details.BankAdd %>
+                    </p>
+                    <p><b>Date : </b>
+                        <%= details.Adate %>
+                    </p>
+                    <p><b>Time : </b>
+                        <%= details.Atime %>
+                    </p>
+                </div>
+            </div>
+            <div id="appdetials">
+
+            </div>
+            <hr>
+            <div id="indDetails">
+                <h6 class="text-danger text-center"> Details of Individuals</h6>
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Blood Group</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Secret Code</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="tablebody">
+                        <tr>
+                            <td>
+                                <%= details.PatientName %>
+                            </td>
+                            <td>
+                                <%= details.type %>
+                            </td>
+                            <td>
+                                <%= details.PBldgrp %>
+                            </td>
+                            <td>
+                                <%= details.PAge %>
+                            </td>
+                            <td><%= details.Scode %></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <hr>
+            <div class="footercontainer">
+                <h3 class="text-danger">Instructions</h1>
+                    <ol>
+                        <li>Please Carry the Appoinment Slip, Aadhar Card, Health Certificate while visiting the center
+                        </li>
+                        <li>Please Arrive at the center atleast 15 minutes before the schedulig time</li>
+                        <li>Please follow COVID appropriate behaviour at the center
+                        <li>Please Provide the secret code when asked to verify</li>
+                        <li>For any furthure details contact 901910919 , Email:erakt@gmail.com</li>
+                        </li>
+
+                    </ol>
+            </div>
+        </div>
+        <div class="btn-container">
+            <button class="btn btn-danger btn" type="submit">Download PDF</button>
+            <button class="btn btn-danger btn"><a href="/">Home</a></button>
+        </div>
+        </div>
+
+        <%- include("footer") -%>
+
+        <script src="/js/appoinment.js"></script>
+</body>
+
+</html>

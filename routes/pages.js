@@ -4,6 +4,7 @@ const fs = require('fs');
 const res = require('express/lib/response');
 
 const router = express.Router();
+const pool = require('../db/database');
 
 function isLoggedInOrNot(x){
   if (typeof x != "undefined") {
@@ -62,12 +63,6 @@ router.get('/U_profile', authController.isLoggedIn, (req, res) => {
   }
 });
 
-router.post('/Donate_Buy', (req, res) => {
-  var user_Exist = isLoggedInOrNot(req.user);
-  var results = req.body.SearchedName;
-  res.render('Donate_Buy', {arr:Apidata[results], userExist: user_Exist});
-});
-
 router.get('/LearnMore', (req, res) => {
   var user_Exist = isLoggedInOrNot(req.user);
   res.render('LearnMore', {userExist: "Yes" });
@@ -79,6 +74,24 @@ router.get('/admin', (req, res) => {
 
 router.get('/admin_Profile', (req, res) => {
   res.render('admin');
+});
+
+router.post('/Donate_Buy',  authController.isLoggedIn, (req, res) => {
+  var user_Exist = isLoggedInOrNot(req.user);
+
+  if(user_Exist==="Yes"){
+    var i = req.body.SearchedName;
+    res.render('confirmation', { arr: Apidata[i], userExist: user_Exist, user:req.user });
+  }
+  else{
+    res.redirect('/Login');
+  }
+  
+});
+
+router.post('/appoinment',  authController.isLoggedIn, (req, res) => {
+  var user_Exist = isLoggedInOrNot(req.user);
+  res.render('appoinment', {details:req.body, userExist:user_Exist});
 });
 
 router.delete('/U_profile/users/me',authController.isLoggedIn, authController.removeUser)
