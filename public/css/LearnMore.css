@@ -1,0 +1,171 @@
+body{
+  font-family:"Montserrat";
+  text-align: center;
+  background-color: #fff;
+}
+
+h1, h2, h3, h4, h5, h6{
+  font-family: "Montserrat-Bold";
+  color: Black;
+}
+
+h2{
+  color: #c91f42;
+  font-weight: 300;
+}
+h3{
+  color: white;
+}
+
+h4{
+  color: black;
+}
+
+
+p{
+  color:Black;
+}
+
+
+/* Headings */
+.main-heading{
+  font-family: "Montserrat-Black";
+  font-size: 3rem;
+  line-height: 2;
+}
+
+.section-heading{
+  font-size: 3rem;
+  line-height: 2;
+}
+
+/* containers */
+.container-fluid{
+  padding: 7% 15%;
+}
+
+/* sections */
+
+.colored-section{
+  background-color:#c91f42;
+  color:Black;
+
+}
+
+.white-section{
+  background-color: #fff;
+}
+
+/* download button */
+
+
+
+
+
+/* features section */
+
+#features{
+  position: relative;
+}
+
+.feature-title{
+  font-size: 1.5rem;
+}
+
+.feature-box{
+  padding:4.5%;
+}
+
+
+.icon{
+  color: #c91f42;
+  margin-bottom: 1rem;
+}
+
+.icon:hover{
+  color:#ff4c68;
+}
+
+/* testimonial section */
+
+#testimonials{
+  background-color:#c91f42;
+  padding: 3% 5%;
+}
+
+.testimonial-text{
+  font-size: 3rem;
+  line-height: 2.5;
+
+}
+
+.web-dev{
+  width: 25%;
+  float: left;
+  margin-right: 30px;
+  line-height: 2;
+}
+
+.data-science{
+  width:25%;
+  float:right;
+  margin-left: 30px;
+  line-height: 2;
+}
+
+.skill-row{
+  width: 50%;
+  margin: 100px auto 100px auto;
+  text-align:left;
+}
+
+
+#press{
+  background-color: #ef8172;
+  padding-bottom: 3%;
+}
+
+.press-logo{
+  width: 15%;
+  margin: 20px 20px 50px;
+}
+
+/* pricing-section */
+
+
+
+#pricing{
+  padding: 100px;
+}
+
+.price-text{
+  font-size: 3rem;
+  line-height: 2;
+}
+.pricing-column{
+  padding: 3% 2%;
+}
+
+
+
+
+.social-icon{
+  margin: 20px 10px;
+}
+
+
+@media(max-width:1028px){
+  #title{
+    text-align: center;
+  }
+  .title-image{
+    position: static;
+    transform: rotate(0);
+  }
+}
+
+
+#basketball{
+  line-height: 2.5;
+  
+}

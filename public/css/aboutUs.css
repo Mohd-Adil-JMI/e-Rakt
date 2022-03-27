@@ -1,0 +1,30 @@
+.about-h {
+    font-size: 1.6em;
+    text-transform: uppercase;
+    color: #C91F42;
+}
+
+.about-p {
+    font-size: 1.2em;
+    line-height: 1.55em;
+    letter-spacing: 0.01em;
+    margin-top: 20px;
+}
+
+.email {
+    text-decoration: none;
+    display: block;
+    padding: 3px;
+    margin: 3px;
+    color: #C91F42;
+}
+
+.about-box{
+    margin: 27px 0px;
+    padding: 5px;
+}
+
+.content-section
+{
+    margin-top: 50px;
+}

@@ -41,6 +41,17 @@ router.get('/story',  authController.isLoggedIn, (req, res) => {
   res.render('story', { userExist: user_Exist });
 });
 
+router.get('/LearnMore', authController.isLoggedIn, (req, res) => {
+  var user_Exist = isLoggedInOrNot(req.user);
+  res.render('LearnMore', {userExist: "Yes" });
+});
+
+router.get('/about', authController.isLoggedIn, (req, res) => {
+  var user_Exist = isLoggedInOrNot(req.user);
+  res.render('aboutUs', {userExist: "Yes" });
+});
+
+
 router.get('/SignUp', (req, res) => {
   res.render('SignUp', {message:""});
 });
@@ -63,10 +74,7 @@ router.get('/U_profile', authController.isLoggedIn, (req, res) => {
   }
 });
 
-router.get('/LearnMore', (req, res) => {
-  var user_Exist = isLoggedInOrNot(req.user);
-  res.render('LearnMore', {userExist: "Yes" });
-});
+
 
 router.get('/admin', (req, res) => {
   res.render('admin');
