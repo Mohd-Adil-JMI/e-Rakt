@@ -1,6 +1,7 @@
 const express = require('express');
 const authController = require('../controllers/auth');
 const fs = require('fs');
+const moment = require('moment');
 const res = require('express/lib/response');
 
 const router = express.Router();
@@ -61,7 +62,7 @@ router.get('/Login', (req, res) => {
   res.render('Login', {message:""});
 });
 
-router.get('/U_profile', authController.isLoggedIn, (req, res) => {
+router.get('/U_profile', authController.isLoggedIn, async (req, res) => {
   
   var ProfileErr = {
     Acc_err:"",
@@ -69,7 +70,22 @@ router.get('/U_profile', authController.isLoggedIn, (req, res) => {
   }
   
   if (typeof req.user != "undefined") {
-    res.render('U_profile', {userExist: "Yes", user : req.user, err:ProfileErr});
+
+    var userHistory = [];
+
+    const history = new Promise((resolve, reject) => {
+      pool.query('SELECT * FROM logs WHERE CustomerID = ?', [req.user.user_id], (err, res) => {
+          if (err) reject(err);
+          resolve(res);
+      })
+    })
+
+    userHistory = await history;
+    for(var i=0; i<userHistory.length; i++){
+      userHistory[i].TransactionDate = moment.utc(userHistory[i].TransactionDate).format("MMM Do, YYYY");
+    }
+    res.render('U_profile', {userExist: "Yes", user : req.user, err:ProfileErr, history : userHistory});
+
   } else{
     res.redirect('/Login');
   }

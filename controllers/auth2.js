@@ -1,4 +1,5 @@
 const moment = require('moment');
+const fs = require('fs');
 const pool = require('../db/database');
 
 exports.admin = async (req, res) => {
@@ -35,15 +36,21 @@ exports.admin = async (req, res) => {
                     })
                 })
                 logsData = await logs;
-                
-                for(var i=0; i<logsData.length; i++){
+
+                for (var i = 0; i < logsData.length; i++) {
                     logsData[i].TransactionDate = moment.utc(logsData[i].TransactionDate).format("MMM Do, YYYY");
                 }
-                for(var i=0; i<userData.length; i++){
+                for (var i = 0; i < userData.length; i++) {
                     userData[i].DOB = moment.utc(userData[i].DOB).format("MMM Do, YYYY");
                 }
                 // console.log(logsData[0].TransactionDate);
-                res.render('admin_Profile', { customer: userData, logs : logsData });
+
+                var Apidata = [];
+                const dataBuffer = fs.readFileSync('api.json');
+                const JSONdata = dataBuffer.toString();
+                const data = JSON.parse(JSONdata).data;
+
+                res.render('admin_Profile', { customer: userData, logs: logsData, banks : data });
             }
         });
     } catch (error) {

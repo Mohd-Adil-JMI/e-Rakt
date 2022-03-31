@@ -13,17 +13,23 @@
                         <button class="nav-link active" id="v-pills-profile-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile"
                             aria-selected="false"><i class="bi bi-person-badge"></i>Account Details</button>
+
+                        <button class="nav-link" id="v-pills-history-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-history" type="button" role="tab" aria-controls="v-pills-history"
+                            aria-selected="false"><i class="bi bi-clock-history"></i>History</button>
+
                         <button class="nav-link" id="v-pills-password-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-password" type="button" role="tab" aria-controls="v-pills-messages"
                             aria-selected="false"><i class="bi bi-key-fill"></i>Change Password</button>
+
                         <button class="nav-link" id="v-pills-delete-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-delete" type="button" role="tab" aria-controls="v-pills-delete"
                             aria-selected="true"><i class="bi bi-trash3-fill"></i>Delete Account</button>
+
                         <button class="nav-link" id="v-pills-logout-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-logout" type="button" role="tab" aria-controls="v-pills-settings"
                             aria-selected="false"><i class="bi bi-box-arrow-in-left"></i>Logout</button>
                     </div>
-
                 </div>
 
                 <div class="user-details">
@@ -48,17 +54,45 @@
                                 value="<%= user.user_id %>">Update</button>
 
                             <% if(err.Acc_err.length>0){ %>
-                                
+
                                 <div class="alert alert-danger" role="alert">
                                     <%= err.Acc_err %> <a href="/U_profile#contact" class="alert-link">Try again</a>
                                 </div>
-                            <% } %>
+                                <% } %>
 
                         </div>
                     </form>
-
-
                 </div>
+
+                <div class="user-history">
+                    <h3>Donation - Purchase History</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">S.No</th>
+                                <th scope="col">Transaction Type</th>
+                                <th scope="col">Transaction Date</th>
+                                <th scope="col">Bank ID</th>
+                                <th scope="col">Purchased Unit</th>
+                                <th scope="col">Bill</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% for(var i=0; i<history.length; i++){ %>
+                                <tr>
+                                    <th scope="row"><%= i+1 %></th>
+                                    <td><%= history[i].Transaction_type  %></td>
+                                    <td><%= history[i].TransactionDate  %></td>
+                                    <td><%= history[i].BankID  %></td>
+                                    <td><%= history[i].units  %></td>
+                                    <td><%= history[i].Bill  %></td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+
                 <div id="password" class="user-password">
                     <h3>Account Details</h3>
                     <form action="/auth/changePassword" method="post">
@@ -71,12 +105,12 @@
                             <input class="value" type="password" name="confirmP" id="confirmP">
                             <button type="submit" class="btn btn-success" name="userID"
                                 value="<%= user.user_id %>">Change Password</button>
-                            
-                                <% if(err.Pass_err.length>0){ %>
+
+                            <% if(err.Pass_err.length>0){ %>
                                 <div class="alert alert-danger error-msg" role="alert">
                                     <%= err.Pass_err %>
-                               </div>
-                            <% } %>
+                                </div>
+                                <% } %>
                         </div>
                     </form>
                 </div>

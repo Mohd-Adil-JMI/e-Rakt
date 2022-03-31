@@ -41,6 +41,32 @@
 
     <div class="content banks">
       <h1>Blood Banks</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Bank ID</th>
+            <th scope="col">Bank Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">City</th>
+            <th scope="col">State</th>
+            <th scope="col">Contact No</th>
+            <th scope="col">Website</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0; i<banks.length; i++){ %>
+            <tr>
+              <td><%= banks[i][0] %></td>
+              <td><%= banks[i][4] %></td>
+              <td><%= banks[i][5] %></td>
+              <td><%= banks[i][2] %></td>
+              <td><%= banks[i][1] %></td>
+              <td><%= banks[i][7] %></td>
+              <td><%= banks[i][11] %></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
     </div>
 
     <div class="content customers">

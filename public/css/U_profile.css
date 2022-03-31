@@ -140,6 +140,26 @@ nav{
     display: none;
 }
 
+
+/* History section */
+
+.user-history{
+    width: 75%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin: 8px;
+}
+
+.user-history table{
+    margin-top: 2rem;
+}
+
+.user-history h3{
+    border-bottom: 1px solid black;
+}
+
 /* change password */
 
 .user-password{
