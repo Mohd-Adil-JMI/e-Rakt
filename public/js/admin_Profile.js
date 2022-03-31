@@ -9,7 +9,7 @@ toggle.addEventListener('click', ()=>{
 })
 let prv = contents[0];
 items.forEach((item,index)=>{
-    if (index==5) {
+    if (index==6) {
         return;
     }
     item.addEventListener('click',()=>{

@@ -1,35 +1,49 @@
-const mysql = require("mysql2");
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
-const { promisify } = require('util');
+const moment = require('moment');
+const pool = require('../db/database');
 
-const db = mysql.createConnection({
-    host: process.env.DATABASE_HOST,
-    user: process.env.DATABASE_USER,
-    password: process.env.DATABASE_PASSWORD,
-    database: process.env.DATABASE
-});
-
-exports.admin = (req, res) => {
+exports.admin = async (req, res) => {
     try {
-        // console.log(req.body);
         const username = req.body.adminName;
         const password = req.body.adminPassword;
 
         if (!username || !password) {
-            // return res.status(400).render('login', {message: 'Please provide an email and password'});
             res.send("One field is empty");
         }
 
-        db.query('SELECT * FROM admin WHERE admin_username = ?', [username], (error, results) => {
-            // console.log(results);
-            // console.log(username + " " + password);
+        pool.query('SELECT * FROM admin WHERE admin_username = ?', [username], async (error, results) => {
             if (!results || password != results[0].admin_password) {
-                //   res.status(401).render('admin', {message: 'Email or Password is incorrect'});
                 res.send("Email or Password is incorrect");
-            } else {
-                // res.send("Logged in!!");
-                res.render('admin_Profile');
+            }
+
+            else {
+                var userData = [];
+                var logsData = [];
+
+                // users record:-
+                const users = new Promise((resolve, reject) => {
+                    pool.query('SELECT * FROM users', (err, res) => {
+                        if (err) reject(err);
+                        resolve(res);
+                    })
+                })
+                userData = await users;
+                // logs record
+                const logs = new Promise((resolve, reject) => {
+                    pool.query('SELECT * FROM logs', (err, res) => {
+                        if (err) reject(err);
+                        resolve(res);
+                    })
+                })
+                logsData = await logs;
+                
+                for(var i=0; i<logsData.length; i++){
+                    logsData[i].TransactionDate = moment.utc(logsData[i].TransactionDate).format("MMM Do, YYYY");
+                }
+                for(var i=0; i<userData.length; i++){
+                    userData[i].DOB = moment.utc(userData[i].DOB).format("MMM Do, YYYY");
+                }
+                // console.log(logsData[0].TransactionDate);
+                res.render('admin_Profile', { customer: userData, logs : logsData });
             }
         });
     } catch (error) {

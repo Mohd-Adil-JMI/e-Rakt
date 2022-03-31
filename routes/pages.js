@@ -5,6 +5,7 @@ const res = require('express/lib/response');
 
 const router = express.Router();
 const pool = require('../db/database');
+const { type } = require('express/lib/response');
 
 function isLoggedInOrNot(x){
   if (typeof x != "undefined") {
@@ -106,8 +107,13 @@ router.post('/appoinment',  authController.isLoggedIn, (req, res) => {
     TransactionDate : req.body.Adate,
     BankID : req.body.BankID,
     BloodGrp : req.body.PBldgrp,
-    Amount : req.body.units,
+    units : req.body.units,
     Bill : req.body.units*2000
+  }
+
+  if(typeof(AppointmentDetails.units)=="undefined"){
+    AppointmentDetails.units = null;
+    AppointmentDetails.Bill = null;
   }
 
   pool.query('INSERT INTO logs SET ?', AppointmentDetails, (err, result)=>{

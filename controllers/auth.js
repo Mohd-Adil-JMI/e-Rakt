@@ -1,10 +1,8 @@
-const mysql = require("mysql2");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { promisify } = require('util');
 
 const pool = require('../db/database');
-var ProfileData = require('../routes/pages');
 
 exports.Login = async (req, res) => {
   try {
@@ -108,16 +106,6 @@ exports.Logout = async (req, res) => {
   });
 
   res.status(200).redirect('/');
-}
-
-function getUser(userID){
-  var res;
-  pool.query('SELECT * FROM users where user_id = ?', [userID], (err, result)=>{
-    if(err) console.log(err);
-
-    console.log(result[0]);
-    return result[0];
-  });
 }
 
 exports.edit = async (req, res) => {
