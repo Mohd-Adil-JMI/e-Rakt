@@ -38,4 +38,4 @@ function changeNav(x) {
   changeNav(mediaObj);
   
   // Add the match function as a listener for state changes:
-  mediaObj.addEventListener(changeNav)
+  mediaObj.addListener(changeNav)
