@@ -15,7 +15,7 @@ const userSchema = 'create table if not exists users (user_id int primary key au
 
 const adminSchema = 'create table if not exists admin (admin_id int primary key auto_increment,admin_username varchar(20),admin_password varchar(100));'
 
-const logsSchema = "create table if not exists Logs (LogID int primary key auto_increment, CustomerID int, Transaction_type varchar(15), TransactionDate date, BankID int, BloodGrp varchar(3), units int, Bill float, foreign key(CustomerID) references users(user_id) on delete set NULL)";
+const logsSchema = "create table if not exists logs (LogID int primary key auto_increment, CustomerID int, Transaction_type varchar(15), TransactionDate date, BankID int, BloodGrp varchar(3), units int, Bill float, foreign key(CustomerID) references users(user_id) on delete set NULL)";
 
 pool.query(userSchema,(error,result)=>{
     if (error) {
