@@ -34,6 +34,7 @@ historyTab.addEventListener('click', () => {
     userDetails.style.display = "none"
     userHistory.style.display = "flex"
     changePassword.style.display = "none"
+    console.log(historyTab)
 })
 changePasswordTab.addEventListener("click", () => {
     userDetails.style.display = "none"
