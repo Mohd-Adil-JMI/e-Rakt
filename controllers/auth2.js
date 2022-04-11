@@ -1,5 +1,5 @@
 const moment = require('moment');
-const fs = require('fs');
+const apiData = require('../api/api');
 const pool = require('../db/database');
 
 exports.admin = async (req, res) => {
@@ -43,14 +43,8 @@ exports.admin = async (req, res) => {
                 for (var i = 0; i < userData.length; i++) {
                     userData[i].DOB = moment.utc(userData[i].DOB).format("MMM Do, YYYY");
                 }
-                // console.log(logsData[0].TransactionDate);
 
-                var Apidata = [];
-                const dataBuffer = fs.readFileSync('api.json');
-                const JSONdata = dataBuffer.toString();
-                const data = JSON.parse(JSONdata).data;
-
-                res.render('admin_Profile', { customer: userData, logs: logsData, banks : data });
+                res.render('admin_Profile', { customer: userData, logs: logsData, banks : apiData });
             }
         });
     } catch (error) {
