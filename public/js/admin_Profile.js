@@ -1,5 +1,5 @@
 const toggle = document.querySelector(".toggle")
-const navbar = document.querySelector(".navbar")
+const navbar = document.querySelector(".admin-navbar")
 const items = document.querySelectorAll(".item")
 const contents = document.querySelectorAll(".content")
 
@@ -9,10 +9,11 @@ toggle.addEventListener('click', ()=>{
 })
 let prv = contents[0];
 items.forEach((item,index)=>{
-    if (index==6) {
+    if (index==5) {
         return;
     }
     item.addEventListener('click',()=>{
+        console.log('clicked');
         prv.classList.remove('active')
         contents[index].classList.add('active')
         prv = contents[index]
@@ -39,3 +40,68 @@ function changeNav(x) {
   
   // Add the match function as a listener for state changes:
   mediaObj.addListener(changeNav)
+
+
+  const barLabels = [
+    'Jan',
+    'Feb',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'Sept',
+    'Oct',
+    'Nov',
+    'Dec'
+];
+
+const barData = {
+    labels: barLabels,
+    datasets: [{
+        label: '2021',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        data: [0, 10, 5, 2, 20, 30, 45, 10, 8, 11, 30, 23],
+    }]
+};
+
+const barConfig = {
+    type: 'line',
+    data: barData,
+    options: {}
+};
+
+const data = {
+    labels: [
+        'Donations',
+        'Purchased',
+        'Null'
+    ],
+    datasets: [{
+        label: 'My First Dataset',
+        data: [300, 100, 60],
+        backgroundColor: [
+            'rgb(255, 99, 132)',
+            'rgb(54, 162, 235)',
+            'rgb(255, 205, 86)'
+        ],
+        hoverOffset: 4
+    }]
+};
+
+const config = {
+    type: 'doughnut',
+    data: data,
+};
+
+const barChart = new Chart(
+    document.getElementById('barChart'),
+    barConfig
+);
+
+const pieChart = new Chart(
+    document.getElementById('pieChart'),
+    config
+);
