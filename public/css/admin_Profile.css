@@ -11,10 +11,12 @@
   --tran4:all 0.4s ease;
 }
 body{
-  display: flexadmin-;
+  display: flex;
+  flex-direction: row;
 }
 .admin-navbar{
-  position: sticky;
+  position: sticky !important;
+  top: 0;
   width: 264px;
   height: 100vh;
   background: #EEEEEE;
@@ -114,6 +116,11 @@ main{
 
 .dashboard{
   margin: 2rem;
+  margin-left: 0;
+}
+
+.dashboard-heading{
+  color: #5a5c69;
 }
 
 .chart{

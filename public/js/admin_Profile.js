@@ -3,10 +3,6 @@ const navbar = document.querySelector(".admin-navbar")
 const items = document.querySelectorAll(".item")
 const contents = document.querySelectorAll(".content")
 
-console.log(navbar);
-console.log(items);
-console.log(contents);
-
 toggle.addEventListener('click', ()=>{
     toggle.classList.toggle('close')
     navbar.classList.toggle('close')
@@ -17,7 +13,6 @@ items.forEach((item,index)=>{
         return;
     }
     item.addEventListener('click',()=>{
-        console.log('clicked');
         prv.classList.remove('active')
         contents[index].classList.add('active')
         prv = contents[index]
