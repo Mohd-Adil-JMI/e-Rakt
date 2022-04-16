@@ -53,12 +53,14 @@
                             <button type="submit" class="btn btn-success update" name="userID"
                                 value="<%= user.user_id %>">Update</button>
 
-                            <% if(err.Acc_err.length>0){ %>
-
-                                <div class="alert alert-danger" role="alert">
-                                    <%= err.Acc_err %> <a href="/U_profile#contact" class="alert-link">Try again</a>
-                                </div>
+                            <div class="error">
+                                <% if(err.Acc_err.length>0){ %>
+                                    <div class="alert alert-danger" role="alert">
+                                        <%= err.Acc_err %>
+                                            <a href="/U_profile" class="alert-link">Try again</a>
+                                    </div>
                                 <% } %>
+                            </div>
 
                         </div>
                     </form>
@@ -81,14 +83,26 @@
                         <tbody>
                             <% for(var i=0; i<history.length; i++){ %>
                                 <tr>
-                                    <th scope="row"><%= i+1 %></th>
-                                    <td><%= history[i].Transaction_type  %></td>
-                                    <td><%= history[i].TransactionDate  %></td>
-                                    <td><%= history[i].BankID  %></td>
-                                    <td><%= history[i].units  %></td>
-                                    <td><%= history[i].Bill  %></td>
+                                    <th scope="row">
+                                        <%= i+1 %>
+                                    </th>
+                                    <td>
+                                        <%= history[i].Transaction_type %>
+                                    </td>
+                                    <td>
+                                        <%= history[i].TransactionDate %>
+                                    </td>
+                                    <td>
+                                        <%= history[i].BankID %>
+                                    </td>
+                                    <td>
+                                        <%= history[i].units %>
+                                    </td>
+                                    <td>
+                                        <%= history[i].Bill %>
+                                    </td>
                                 </tr>
-                            <% } %>
+                                <% } %>
                         </tbody>
                     </table>
                 </div>
@@ -98,19 +112,22 @@
                     <form action="/auth/changePassword" method="post">
                         <div class="info">
                             <label class="key" for="oldP">Old Password</label>
-                            <input class="value" type="password" name="oldP" id="oldP">
+                            <input class="value" type="password" name="oldP" id="oldP" required>
                             <label class="key" for="newP">New Password</label>
-                            <input class="value" type="password" name="newP" id="newP">
+                            <input class="value" type="password" name="newP" id="newP" required>
                             <label class="key" for="confirmP">Confirm Password</label>
-                            <input class="value" type="password" name="confirmP" id="confirmP">
+                            <input class="value" type="password" name="confirmP" id="confirmP" required>
                             <button type="submit" class="btn btn-success" name="userID"
                                 value="<%= user.user_id %>">Change Password</button>
 
-                            <% if(err.Pass_err.length>0){ %>
-                                <div class="alert alert-danger error-msg" role="alert">
-                                    <%= err.Pass_err %>
-                                </div>
+                            <div class="error">
+                                <% if(err.Pass_err.length>0){ %>
+                                    <div class="alert alert-danger error-msg" role="alert">
+                                        <%= err.Pass_err %>
+                                            <a href="/U_profile#password" class="alert-link">Try Again!</a>
+                                    </div>
                                 <% } %>
+                            </div>
                         </div>
                     </form>
                 </div>

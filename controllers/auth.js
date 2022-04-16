@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { promisify } = require('util');
+const moment = require('moment');
 
 const pool = require('../db/database');
 
@@ -10,7 +11,7 @@ exports.Login = async (req, res) => {
 
     pool.query('SELECT * FROM users WHERE email = ?', [email], async (error, results) => {
       if (!results || !(await bcrypt.compare(password, results[0].Password))) {
-        res.redirect('/Login')
+        res.render('Login', {message:'No account found or wrong Password!'})
       } else {
         const id = results[0].user_id;
 
@@ -36,8 +37,17 @@ exports.Login = async (req, res) => {
   }
 }
 
+function _calculateAge(birthday) { // birthday is a date
+  var ageDifMs = Date.now() - birthday.getTime();
+  var ageDate = new Date(ageDifMs); // miliseconds from epoch
+  return Math.abs(ageDate.getUTCFullYear() - 1970);
+}
+
 exports.SignUp = (req, res) => {
   const { fname, lname, email, phoneNo, password, Cpassword, dob, aadharNo, add, bloodgrp, gender } = req.body;
+
+  var birthDate = new Date(dob);
+  var age = _calculateAge(birthDate);
 
   pool.query('SELECT email FROM users WHERE email = ?', [email], async (error, results) => {
     if (error) {
@@ -45,9 +55,17 @@ exports.SignUp = (req, res) => {
     }
 
     if (results.length > 0) {
-      return res.render('SignUp', { message: 'That email is already in use' });
+      return res.render('SignUp', { message: 'That email is already in use!' });
+    } else if (phoneNo.length < 10) {
+      return res.render('SignUp', { message: 'Enter Correct Phone No!' });
+    }else if (password.length < 7) {
+      return res.render('SignUp', { message: 'Password too short!' });
     } else if (password !== Cpassword) {
-      return res.render('SignUp', { message: 'Passwords do not match' });
+      return res.render('SignUp', { message: 'Passwords do not match!' });
+    } else if (age < 18) {
+      return res.render('SignUp', { message: 'You should be above 18!' });
+    } else if (aadharNo.length != 12) {
+      return res.render('SignUp', { message: 'Enter Correct Aadhar No!' });
     }
 
     let hashedPassword = await bcrypt.hash(password, 8);
@@ -118,16 +136,30 @@ exports.edit = async (req, res) => {
 
   var userDetails;
 
+  var userHistory = [];
+
+  const history = new Promise((resolve, reject) => {
+    pool.query('SELECT * FROM logs WHERE CustomerID = ?', [userID], (err, res) => {
+        if (err) reject(err);
+        resolve(res);
+    })
+  })
+
+  userHistory = await history;
+  for(var i=0; i<userHistory.length; i++){
+    userHistory[i].TransactionDate = moment.utc(userHistory[i].TransactionDate).format("MMM Do, YYYY");
+  }
+
   pool.query('SELECT * FROM users where user_id = ?', [userID], (err, result)=>{
     if(err) console.log(err);
 
     if(phone.length<10){
       ProfileErr.Acc_err = "Enter correct Phone Number";
-      res.render('U_profile', {userExist:"Yes", user:result[0], err:ProfileErr});
+      res.render('U_profile', {userExist:"Yes", user:result[0], err:ProfileErr, history : userHistory});
     }
     else if(aadhar.length!=12){
       ProfileErr.Acc_err = "Enter correct Aadhar Number";
-      res.render('U_profile', {userExist:"Yes", user:result[0], err:ProfileErr});
+      res.render('U_profile', {userExist:"Yes", user:result[0], err:ProfileErr, history : userHistory});
     }
   
     else{
@@ -135,7 +167,6 @@ exports.edit = async (req, res) => {
         , address, userID], (err, result) => {
         if (err) console.log(err);
         else {
-          console.log("done");
           res.redirect('/U_profile');
         }
       });
@@ -151,28 +182,38 @@ exports.changePassword = async (req, res) => {
     Pass_err:""
   }
 
+  var userHistory = [];
+
+  const history = new Promise((resolve, reject) => {
+    pool.query('SELECT * FROM logs WHERE CustomerID = ?', [userID], (err, res) => {
+        if (err) reject(err);
+        resolve(res);
+    })
+  })
+
+  userHistory = await history;
+  for(var i=0; i<userHistory.length; i++){
+    userHistory[i].TransactionDate = moment.utc(userHistory[i].TransactionDate).format("MMM Do, YYYY");
+  }
+
   pool.query('SELECT * FROM users WHERE user_id = ?', [userID], async (error, result) => {
     if (!(await bcrypt.compare(oldP, result[0].Password))) {
-      console.log("Password is incorrect!");
       ProfileErr.Pass_err = "Password is incorrect!";
-      res.render('U_profile', {userExist:"Yes", user:result[0], err:ProfileErr});
+      res.render('U_profile', {userExist:"Yes", user:result[0], err:ProfileErr, history : userHistory});
     }
     else if (oldP === newP) {
-      console.log("New Password cannot be same as old one");
-      ProfileErr.Pass_err = "New Password cannot be same as old one";
-      res.render('U_profile', {userExist:"Yes", user:result[0], err:ProfileErr});
+      ProfileErr.Pass_err = "New Password cannot be same as old one!";
+      res.render('U_profile', {userExist:"Yes", user:result[0], err:ProfileErr, history : userHistory});
     }
     else if (newP != confirmP) {
-      console.log("New passwords do not match");
-      ProfileErr.Pass_err = "new passwords do not match";
-      res.render('U_profile', {userExist:"Yes", user:result[0], err:ProfileErr});
+      ProfileErr.Pass_err = "new passwords do not match!";
+      res.render('U_profile', {userExist:"Yes", user:result[0], err:ProfileErr, history : userHistory});
     }
     else {
       let hashedNew = await bcrypt.hash(newP, 8);
       pool.query('UPDATE users SET PASSWORD = ? WHERE user_id = ?', [hashedNew, userID], (err, results) => {
         if (err) console.log(err);
         else {
-          console.log("updated");
           res.redirect('/U_profile');
         }
       });
@@ -181,7 +222,6 @@ exports.changePassword = async (req, res) => {
 }
 exports.removeUser = async (req, res) => {
   const user_id = req.user.user_id
-  console.log(user_id)
   pool.query('delete FROM users WHERE user_id = ?', [user_id], (error, result) => {
     if (error) {
       return res.status(401).send(error);

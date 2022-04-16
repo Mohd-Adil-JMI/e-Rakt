@@ -131,7 +131,6 @@ router.post('/appoinment',  authController.isLoggedIn, (req, res) => {
 
   pool.query('INSERT INTO logs SET ?', AppointmentDetails, (err, result)=>{
     if(err) console.log(err);
-    else console.log('done');
   })
 
   res.render('appoinment', {details:req.body, userExist:user_Exist});

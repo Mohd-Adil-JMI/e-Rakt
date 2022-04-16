@@ -21,41 +21,18 @@
     height: 74px;
 }
 
-/* Footer */
-footer {
-    display: grid;
-    background-color: rgb(42, 56, 56);
-    text-align: center;
-    padding-bottom: 20px;
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 30px;
-    color: white;
-    width: inherit;
-    margin-top: 60px;
-}
-
-body{
-  height: 100vh;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-}
-
-a {
-  text-decoration: none;
-}
-
 .container{
-  /* max-width: 700px;
-  width: 100%;
-  background-color: #fff; */
   padding: 25px 30px;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.15);
-  /* margin-left: 500px;
-  margin-top: -50px; */
 }
+
+#error{
+  align-items: center;
+  margin: 3rem auto 0;
+  width: 100%;
+}
+
 .container .title{
   font-size: 25px;
   font-weight: 500;
