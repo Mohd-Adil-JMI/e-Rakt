@@ -1,6 +1,6 @@
 const express = require('express');
 const authController = require('../controllers/auth');
-const fs = require('fs');
+const apiData = require('../api/api');
 const moment = require('moment');
 const res = require('express/lib/response');
 
@@ -21,9 +21,6 @@ router.get('/', authController.isLoggedIn, (req, res) => {
 });
 
 var Apidata = [];
-const dataBuffer = fs.readFileSync('api.json');
-const JSONdata = dataBuffer.toString();
-const data = JSON.parse(JSONdata).data;
 
 router.get('/search',  authController.isLoggedIn, (req, res) => {
   var user_Exist = isLoggedInOrNot(req.user);
@@ -34,7 +31,7 @@ router.get('/search',  authController.isLoggedIn, (req, res) => {
 router.post('/search', (req, res) => {
   var user_Exist = isLoggedInOrNot(req.user);
 
-  Apidata = data.filter((bank) => { return (bank[2] == req.body.city && bank[1] == req.body.state) });
+  Apidata = apiData.filter((bank) => { return (bank[2] == req.body.city && bank[1] == req.body.state) });
   res.render('search', { SearchedYet : 1, results: Apidata, userExist: user_Exist });
 });
 
@@ -134,7 +131,6 @@ router.post('/appoinment',  authController.isLoggedIn, (req, res) => {
 
   pool.query('INSERT INTO logs SET ?', AppointmentDetails, (err, result)=>{
     if(err) console.log(err);
-    else console.log('done');
   })
 
   res.render('appoinment', {details:req.body, userExist:user_Exist});
