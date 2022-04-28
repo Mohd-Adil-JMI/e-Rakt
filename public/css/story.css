@@ -3,24 +3,9 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Raleway');
-@import url('https://fonts.googleapis.com/css?family=Fjalla+One');  
-@import url('https://fonts.googleapis.com/css?family=Exo+2');  
-*{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    scroll-behavior: smooth;
-}
 
-html {
-    margin: 0;
-    padding: 0;
-}
 body {
-    font-size: 13pt;
     background-color: #efefef;
-    padding: 10px;
-    margin: auto;
     position: relative;
     font-family:'Raleway',monospace;
 }
@@ -40,10 +25,20 @@ body {
 .carousel-item{
     height: 32rem;
 }
+.carousel-item:hover::before{
+    content: "Click to Read story";
+    text-align: center;
+    position: absolute;
+    left: 8px;
+    bottom: 8px;
+    color: #fff;
+}
 
 .carousel-item img{
+    width: 100%;
     justify-content: center;
     margin: auto;
+    border-radius: 0px 0px 4px 4px;
 }
 
 .carousel-caption {
@@ -53,7 +48,6 @@ body {
     right: 15%;
     bottom: 3rem;
     left: 35%;
-    /* padding-top: 1.25rem; */
     padding-bottom: 1.25rem;
     color: #fff;
     text-align: center;
@@ -64,7 +58,8 @@ body {
 }
 
 .carousel-inner{
-    background-color: #555;
+    border-radius: 4px;
+    background-color: rgb(206, 206, 206);
 }
 
 
@@ -75,8 +70,7 @@ body {
     background: rgba(0, 0, 0, 0.10);  
     height: 300px;  
     margin: 20px auto;  
-    display: flex;  
-    box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.47);  
+    display: flex; 
     flex-direction: row;  
     cursor: pointer;  
     margin-bottom: 100px;  
@@ -88,7 +82,6 @@ body {
     background-position: left;  
     background-size: cover;  
     transition: .7s;  
-    box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.47);  
   }  
   .box:hover{  
     flex: 7;  
@@ -156,11 +149,7 @@ body {
     }  
     .accordion {  
       flex-direction: row;  
-      height: 700px;  
-      box-shadow: none;  
-    }  
-    .box {  
-      box-shadow: none;  
+      height: 700px; 
     }  
     .box:hover {  
       flex: 7;  
@@ -168,22 +157,18 @@ body {
   }  
 .Box{
     background-color: rgb(206, 206, 206);
-    box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.47); 
     text-align: center;
     padding: 7px ;
     width: 300px;
-    
-    
-    
+    border-radius: 4px;
 }
 .Boxx{
     background-color: rgb(206, 206, 206);
-    box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.47); 
     text-align: center;
     padding: 5px ;
     width: 250px;
     margin: 5%;
-
+    border-radius: 4px;
 }
 .Box h1{
     text-align: center;
@@ -236,10 +221,7 @@ em {
     font-weight:400;
     font-size:medium;
 }
-* {
-    font-size: 1em;
-    color: #555;
-}
+
 h1 span {
     border: 4px dashed #20bcd5;
     padding: 10px;
@@ -282,8 +264,8 @@ p {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 10px;
-    border-radius:  0px;
-    box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.47); 
+    border-radius:  4px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1); 
     display: none;
 }
 .Story ol{
@@ -497,49 +479,4 @@ nav{
 
 .open{
     display: block;
-}
-
-
-/* footer (Contact us) */
-footer{
-    margin-top: 5rem;
-    background-color: #333;
-    padding: 2rem;
-    list-style-type: none;
-}
-
-footer hr{
-    color: #a1a1a2;
-}
-
-.footerList{
-    list-style-type: none;
-}
-
-.footerList a{
-    text-decoration: none;
-    color: #a1a1a2;
-}
-
-.footerList a:hover{
-    color: #fff;
-}
-
-.footerSec{
-    color: #efefef;
-    /* font-family: 'Source Sans Pro', sans-serif; */
-}
-
-.footerSec img{
-    width: 120px;
-    margin: 4px;
-}
-
-.donate{
-    text-align: center;
-}
-
-.copyRightText{
-    text-align: center;
-    color: #A1A1A2;
 }
