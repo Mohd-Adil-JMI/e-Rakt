@@ -42,12 +42,12 @@ router.get('/story',  authController.isLoggedIn, (req, res) => {
 
 router.get('/LearnMore', authController.isLoggedIn, (req, res) => {
   var user_Exist = isLoggedInOrNot(req.user);
-  res.render('LearnMore', {userExist: "Yes" });
+  res.render('LearnMore', {userExist: user_Exist });
 });
 
 router.get('/about', authController.isLoggedIn, (req, res) => {
   var user_Exist = isLoggedInOrNot(req.user);
-  res.render('aboutUs', {userExist: "Yes" });
+  res.render('aboutUs', {userExist: user_Exist });
 });
 
 
