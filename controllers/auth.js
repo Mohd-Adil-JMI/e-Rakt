@@ -10,9 +10,12 @@ exports.Login = async (req, res) => {
     const { email, password } = req.body;
 
     pool.query('SELECT * FROM users WHERE email = ?', [email], async (error, results) => {
-      if (!results || !(await bcrypt.compare(password, results[0].Password))) {
-        res.render('Login', {message:'No account found or wrong Password!'})
+      if (results.length === 0) {
+        res.render('Login', {message:'No account found'})
       } else {
+        if (!(await bcrypt.compare(password, results[0].Password))) {
+          return res.render('Login', {message:'Please enter correct password'})
+        }
         const id = results[0].user_id;
 
         const token = jwt.sign({ id }, process.env.JWT_SECRET, {
