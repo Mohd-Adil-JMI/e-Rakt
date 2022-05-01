@@ -16,11 +16,17 @@
     <section class="logo">
       <img src="/img/logo.png" alt="error" srcset="">
     </section>
-
+    <div id="error">
+      <% if(message.length>0){ %>
+          <div class="alert alert-danger error-msg" role="alert">
+              <%= message %>
+          </div>
+      <% } %>
+    </div>
     <div class="container">
       <div class="title">Registration</div>
       <div class="content">
-        <form action="auth/SignUp" method="post">
+        <form action="/auth/SignUp" method="post">
           <div class="user-details">
             <div class="input-box">
               <span class="details">First Name</span>
@@ -102,15 +108,6 @@
       <div class="option">
         <p>Already have an account?<a href="/Login"> Sign In</a></p>
       </div>
-    </div>
-    
-    <div id="error">
-      <% if(message.length>0){ %>
-          <div class="alert alert-danger error-msg" role="alert">
-              <%= message %>
-              <a href="/SignUp" class="alert-link">Try again!</a>
-          </div>
-      <% } %>
     </div>
     
   </div>

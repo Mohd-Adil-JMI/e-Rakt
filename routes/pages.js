@@ -50,15 +50,6 @@ router.get('/about', authController.isLoggedIn, (req, res) => {
   res.render('aboutUs', {userExist: user_Exist });
 });
 
-
-router.get('/SignUp', (req, res) => {
-  res.render('SignUp', {message:""});
-});
-
-router.get('/Login', (req, res) => {
-  res.render('Login', {message:""});
-});
-
 router.get('/U_profile', authController.isLoggedIn, async (req, res) => {
   
   var ProfileErr = {
