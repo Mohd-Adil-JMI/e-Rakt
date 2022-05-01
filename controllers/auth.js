@@ -90,7 +90,7 @@ exports.SignUp = (req, res) => {
       if (error) {
         console.log(error);
       } else {
-        return res.status(200).redirect('/Login');
+        return res.status(200).redirect('/auth/Login');
       }
     });
   });
