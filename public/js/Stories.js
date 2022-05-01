@@ -9,18 +9,12 @@ carouselStory.forEach((item,index)=>{
     item.addEventListener('click',()=>{
         expandedStory[index].classList.add('open')
         storyIndex.classList.add('close')
+        document.documentElement.scrollTop = 0;
     })
 
     backButtons[index].addEventListener('click', ()=>{
         expandedStory[index].classList.remove('open')
         storyIndex.classList.remove('close')
     })
-})
-
-
-// carousel section
-
-document.ready(function(){
-	$('#carouselExampleCaptions2').carousel();
 })
 
