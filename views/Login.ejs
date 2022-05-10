@@ -16,7 +16,7 @@
         </section>
 
         <div class="container">
-            <form action="auth/Login" method="post">
+            <form action="/auth/Login" method="post">
                 <div class="title">Login</div>
                 <div class="input-box underline">
                     <input name="email" type="text" placeholder="Enter Your Email" required>
@@ -32,7 +32,7 @@
             </form>
             <div class="option">Don't have a account? Sign Up</div>
             <div class="twitter">
-                <a href="/SignUp"><i class="fab fa-twitter"></i>Sign Up</a>
+                <a href="/auth/SignUp"><i class="fab fa-twitter"></i>Sign Up</a>
             </div>
         </div>
 
@@ -40,7 +40,6 @@
             <% if(message.length>0){ %>
                 <div class="alert alert-danger error-msg" role="alert">
                     <%= message %>
-                    <a href="/Login" class="alert-link">Try again</a>
                 </div>
             <% } %>
         </div>
