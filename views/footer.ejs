@@ -1,38 +1,64 @@
 <footer id="contact">
     <div class="row footerSec">
-        <div class="col-md-4 footerBox">
-            <ul class="footerList">
-                <h3>COMPANY PAGES</h3>
-                <li><a href="">About e-Rakt Blood Center</a></li>
-                <li><a href="">Donation Center Locations & Hours</a></li>
-                <li><a href="">Current Job Openings</a></li>
-            </ul>
 
-            <ul class="footerList">
-                <h3>MEDIA</h3>
-                <li><a href="">Media Releases</a></li>
-                <li><a href="">Media Kit</a></li>
-                <li><a href="">e-RBC Stories</a></li>
-            </ul>
+        <div class="col-md-6 moreInfo">
+
+            <h3 class="footerSec-heading">COMPANY PAGES</h3>
+
+            <div class="footerboxes">
+
+                <div class="footerbox">
+                    <ul class="footerList">
+                        <h5>More Info : </h5>
+                        <li><a href="/about">About the Developers</a></li>
+                        <li><a href="https://www.jmi.ac.in/" target="blank">About Jamia Millia Islamia</a></li>
+                        <li><a href="https://github.com/Mohd-Adil-JMI/e-Rakt" target="blank">About e-Rakt Blood Center</a></li>
+                        <li><a
+                                href="https://data1-esriindia1.opendata.arcgis.com/datasets/f088928d87b34bdbbb760649e123bd99/explore?location=20.859941%2C82.602050%2C5.31" target="blank">Indian
+                                gov Blood Bank API</a></li>
+                        <li><a href="https://www.eraktkosh.in/BLDAHIMS/bloodbank/transactions/bbpublicindex.html" target="blank">Other
+                                Donation Center Locations</a></li>
+                        <li><a href="/story">e-rakt stories</a></li>
+                    </ul>
+                </div>
+
+                <div class="footerbox">
+                    <ul class="footerList">
+                        <h5>Location</h5>
+                        <a
+                            href="https://www.google.com/maps/place/Jamia+Millia+Islamia,+Jamia+Nagar,+Okhla,+New+Delhi,+Delhi+110025/@28.5615563,77.2792636,17.34z/data=!4m5!3m4!1s0x390ce38c9ea28f03:0xcf085976f2110601!8m2!3d28.5623169!4d77.2803832"><img
+                                class="footerimg" src="/img/mp1.jpg" alt=""></a>
+
+                        <p class="address">Jamia Millia Islamia (JMI), University Jamia Nagar, New Delhi-110025, India
+                        </p>
+                    </ul>
+                </div>
+            </div>
+
         </div>
 
-        <div class="col-md-4">
-            <h3>Location</h3>
-            <img class="footerimg" src="/img/mp1.jpg" alt="">
-            <img class="footerimg" src="/img/mp1.jpg" alt="">
-            <img class="footerimg" src="/img/mp1.jpg" alt="">
-        </div>
+        <div class="col-md-6 form-sec">
+            <h3 class="footerSec-heading">CONTACT US</h3>
 
-        <div class="col-md-4 donate">
-            <h3>Donate</h3>
-            <img src="/img/BloodBus.png" alt="">
-            <ul class="footerList">
-                <h3>Contact Us</h3>
-                <li>PHONE: <a href="tel:+919760678195">9760678195</a></li>
-                <li>TOLL-FREE: <a href="tel:+9105812972938">05812972938</a></li>
-                <li>EMAIL US : <a href="mailto:erbc@gmail.com">erbc@gmail.com</a></li>
-                
-            </ul>
+            <div class="footerboxes">
+                <div>
+                    <ul class="footerList">
+                        <img src="/img/BloodBus.png" alt="">
+                        <li>PHONE: <a href="tel:+919760678195">9760678195</a></li>
+                        <li>TOLL-FREE: <a href="tel:+9105812972938">05812972938</a></li>
+                        <li>EMAIL US : <a href="mailto:erbc@gmail.com">erbc@gmail.com</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-6 footerform">
+                    <form id="myForm" action="">
+                        <input type="text" name="name" id="name" placeholder="Your Name" required>
+                        <input type="text" name="email" id="email" placeholder="Your Email" required>
+                        <input type="text" name="msg" id="msg" placeholder="Type Your message here" required>
+                        <button id='formBtn' onclick="sendMail()" type="submit" class="btn btn-outline-secondary">Submit</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -50,4 +76,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
     integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
     crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js">
+</script>
+<script type="text/javascript">
 
+    (function () {
+        emailjs.init("UhC8PcDhoSLkAzY4E");
+    })();
+</script>
+<script src="/js/footer.js"></script>

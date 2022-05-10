@@ -1,9 +1,9 @@
 <%- include("header") -%>
-<link rel="stylesheet" href="/css/style.css">
-<link rel="stylesheet" href="/css/appoinment.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/appoinment.css">
 
     <%- include("navbar") -%>
-        <div class="container-body">
+        <div class="container-body html-content">
             <div class="container">
                 <h3 class="text-danger text-center">Erakt Appoinment Details</h3>
                 <div id="Pdetails">
@@ -38,9 +38,9 @@
                             <th scope="col">Blood Group</th>
                             <th scope="col">Age</th>
                             <th scope="col">Secret Code</th>
-                            <% if(details.type=="Purchase"){ %>
+                            <% if(details.type=="Purchase" ){ %>
                                 <th scope="col">Bill</th>
-                            <% } %>
+                                <% } %>
                         </tr>
                     </thead>
                     <tbody id="tablebody">
@@ -57,13 +57,15 @@
                             <td>
                                 <%= details.PAge %>
                             </td>
-                            <td><%= details.Scode %></td>
+                            <td>
+                                <%= details.Scode %>
+                            </td>
 
-                            <% if(details.type=="Purchase"){ %>
+                            <% if(details.type=="Purchase" ){ %>
                                 <td>
                                     ₹ <%= details.units * 2000 %>/-
                                 </td>
-                            <% } %>
+                                <% } %>
                         </tr>
                     </tbody>
                 </table>
@@ -83,15 +85,20 @@
                     </ol>
             </div>
         </div>
+
         <div class="btn-container">
-            <button class="btn btn-danger btn" type="submit">Download PDF</button>
+            <button class="btn btn-danger btn download-pdf" type="submit">Download PDF</button>
             <button class="btn btn-danger btn"><a href="/">Home</a></button>
         </div>
         </div>
 
-        <%- include("footer") -%>
+    <%- include("footer") -%>
 
-        <script src="/js/appoinment.js"></script>
+    <script src="/js/appointment.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script type="text/javascript" src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+            
+
 </body>
-
 </html>
